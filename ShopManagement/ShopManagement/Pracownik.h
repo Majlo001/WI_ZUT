@@ -48,6 +48,7 @@ public:
     //Prze³adowanie operatorów
     Pracownik& operator=(const Pracownik& pracownik);
     friend ostream& operator<<(ostream& out, const Pracownik& pracownik);
+    auto& operator[](int index);
 
     void stworz(Zadania**& listaZadan, const size_t rozmiar);
     void usun();

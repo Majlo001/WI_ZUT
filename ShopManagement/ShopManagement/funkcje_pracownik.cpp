@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <cassert>
 #include "Pracownik.h"
 
 using namespace std;
@@ -30,6 +31,10 @@ Pracownik& Pracownik::operator=(const Pracownik& pracownik) {
 ostream& operator<<(ostream& out, const Pracownik& pracownik) {
     out << pracownik.id << "/t" << pracownik.imie << "/t" << pracownik.nazwisko << "/t" << pracownik.wynagrodzenie << endl;
     return out;
+}
+auto& Pracownik::operator[](int index) {
+    assert(0 <= index && index <= iloscZadan);
+    return listaZadan[index];
 }
 
 Pracownik::Pracownik() : id{ idPracownika() } {};

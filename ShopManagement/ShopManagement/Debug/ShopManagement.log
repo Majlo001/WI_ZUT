@@ -1,2 +1,10 @@
-﻿  ShopManagement.cpp
+﻿  funkcje_pracownik.cpp
+Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\funkcje_pracownik.cpp(23,27): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\funkcje_pracownik.cpp(36,5): warning C4018: "<=": niezgodność typu ze znakiem/bez znaku
+Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\funkcje_pracownik.cpp(61,27): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\funkcje_pracownik.cpp(93,12): warning C4101: "d": lokalna zmienna, do której nie istnieje odwołanie
+  menu.cpp
+  ShopManagement.cpp
+  Generowanie kodu...
+  LINK : nie znaleziono elementu Z:\ZUT_Shop_Management\ShopManagement\Debug\ShopManagement.exe ani nie został on skompilowany podczas ostatniego konsolidowania przyrostowego; zostanie wykonana pełna konsolidacja
   ShopManagement.vcxproj -> Z:\ZUT_Shop_Management\ShopManagement\Debug\ShopManagement.exe
