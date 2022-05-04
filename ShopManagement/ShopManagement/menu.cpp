@@ -157,6 +157,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
         cout << "4. Dodaj nowy produkt" << endl;
         //cout << "5. Statystyki produktów" << endl;
         cout << "6. Zmiana ceny produktu" << endl;
+        cout << "7. Dodawanie iloœci produktu" << endl;
         cout << "0. Wróæ do g³ównego menu" << endl << endl;
         cout << "<=============================>" << endl << endl;
         cout << "Wybierz funkcjê: ";
@@ -169,7 +170,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
             ini(produkty, rozmiarProd);
             break;
         case(2):
-            cout << "Indeks pracownika do usuniêcia: ";
+            cout << "Indeks produktu do usuniêcia: ";
             cin >> index;
             usun(produkty, rozmiarProd, index);
             break;
@@ -192,7 +193,16 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
                 zmianaCeny(produkty);
             }
             else {
-                cout << "Brak pracowników" << endl;
+                cout << "Brak produktów" << endl;
+            }
+            break;
+        case(7):
+            if (produkty != nullptr) {
+                cout << "Podaj indeks produktu: "; cin >> index;
+                produkty[index]->dodajIloscProduktu();
+            }
+            else {
+                cout << "Brak produktów" << endl;
             }
             break;
         case(0):

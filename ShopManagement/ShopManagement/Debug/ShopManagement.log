@@ -1,3 +1,6 @@
-﻿  funkcje_produkt.cpp
+﻿  ShopManagement.cpp
+  funkcje_produkt.cpp
 C:\Users\Majlo\Gitbin\WI_ZUT\ShopManagement\ShopManagement\funkcje_produkt.cpp(154,16): warning C4101: "choice": lokalna zmienna, do której nie istnieje odwołanie
+  menu.cpp
+  Generowanie kodu...
   ShopManagement.vcxproj -> C:\Users\Majlo\Gitbin\WI_ZUT\ShopManagement\Debug\ShopManagement.exe
