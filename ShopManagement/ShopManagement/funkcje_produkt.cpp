@@ -8,6 +8,10 @@ using namespace std;
 
 
 
+
+Produkt::~Produkt() {}
+
+
 string randSKU() {
     static const char alphanum[] =
         "0123456789"
@@ -37,8 +41,19 @@ void stworz(Produkt**& produkty) {
 }
 void stworz(Produkt**& produkty, const size_t rozmiar) {
     produkty = new Produkt * [rozmiar];
-    for (size_t ind = 0; ind < rozmiar; ind++)
-        produkty[ind] = new Produkt;
+    for (size_t ind = 0; ind < rozmiar; ind++) {
+        int tmp = rand() % 3 + 1;
+        
+        if (tmp == 1) {
+            produkty[ind] = new ProduktNaWage;
+        } 
+        else if (tmp == 2) {
+            produkty[ind] = new ProduktNaSztuki;
+        }
+        else {
+            produkty[ind] = new ProduktNaObjetosc;
+        }
+    }
 }
 void ini(Produkt** produkty, const size_t rozmiar) {
     string s;
@@ -64,16 +79,32 @@ void dodaj(Produkt**& produkty, size_t& size) {
     size_t ilosc;
     double cena;
     Produkt** temp = new Produkt * [size + 1];
+
+
+    cout << "WprowadŸ jednostkê produktu: ";
+    cin >> s;
+
     if (size == 0) {
-        temp[size] = new Produkt;
+        if (s == "kg")
+            temp[size] = new ProduktNaWage;
+        else if (s == "szt")
+            temp[size] = new ProduktNaSztuki;
+        else
+            temp[size] = new ProduktNaObjetosc;
     }
     else {
         for (size_t i = 0; i < size; ++i)
             temp[i] = produkty[i];
-        temp[size] = new Produkt;
+        if (s == "kg")
+            temp[size] = new ProduktNaWage;
+        else if (s == "szt")
+            temp[size] = new ProduktNaSztuki;
+        else
+            temp[size] = new ProduktNaObjetosc;
         delete[] produkty;
     }
     produkty = temp;
+
 
     cout << "WprowadŸ nazwê produktu: ";
     cin >> s;
@@ -93,7 +124,7 @@ void dodaj(Produkt**& produkty, size_t& size) {
 void print(Produkt** produkty, const size_t rozmiar) {
     cout << "<======= Produkty =======>" << endl;
     for (size_t ind = 0; ind < rozmiar; ind++) {
-        cout << produkty[ind]->getID() << "\t" << produkty[ind]->getSKU() << "\t" << produkty[ind]->getNazwa() << "\t" << produkty[ind]->getProducent() << "\t" << produkty[ind]->getCena() << "\t" << produkty[ind]->getIlosc() << endl;
+        cout << produkty[ind]->getID() << "\t" << produkty[ind]->getSKU() << "\t" << produkty[ind]->getNazwa() << "\t" << produkty[ind]->getProducent() << "\t" << produkty[ind]->getCena() << "\t" << produkty[ind]->getIlosc() << produkty[ind]->getJednostka() << endl;
     }
 }
 void usun(Produkt**& produkty, size_t& rozmiar) {
@@ -123,7 +154,7 @@ void zmianaCeny(Produkt**& produkty) {
     int index, choice;
     double cena = 0;
 
-    cout << "Indeks pracownika do zmiany wynagrodzenia: ";
+    cout << "Indeks pracownika do zmiany ceny: ";
     cin >> index;
 
     cout << endl << "Produkt: " << produkty[index]->getSKU() << " " << produkty[index]->getNazwa() << endl;

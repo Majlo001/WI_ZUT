@@ -12,20 +12,59 @@ class Produkt {
     string nazwa;
     double cena;
     size_t ilosc;
-    string producent; //docelowo Producent producent;
+    string producent;
+    string jednostka;
 public:
+    virtual void dodajProdukt() = 0;
+
     Produkt();
     Produkt(string, double, size_t, string);
+    virtual ~Produkt();
+
     int getID();
     string getSKU();
     string getNazwa();
     string getProducent();
     double getCena();
     size_t getIlosc();
+    string getJednostka();
     void setNazwa(string);
     void setCena(double);
     void setIlosc(size_t);
     void setProducent(string);
+    void setJednostka(string);
+};
+
+class ProduktNaWage : public Produkt{
+public:
+    ProduktNaWage() {
+        setJednostka("kg");
+    }
+    virtual ~ProduktNaWage() {}
+    virtual void dodajProdukt() {
+        cout << "Produkt Na Wagê" << endl;
+    }
+};
+class ProduktNaSztuki : public Produkt {
+public:
+    ProduktNaSztuki() {
+        setJednostka("szt");
+    }
+    virtual ~ProduktNaSztuki() {}
+    virtual void dodajProdukt() {
+        cout << "Produkt Na Sztuki" << endl;
+    }
+
+};
+class ProduktNaObjetosc : public Produkt {
+public:
+    ProduktNaObjetosc() {
+        setJednostka("l");
+    }
+    virtual ~ProduktNaObjetosc() {}
+    virtual void dodajProdukt() {
+        cout << "Produkt Na Objêtoœæ" << endl;
+    }
 };
 
 
@@ -35,11 +74,14 @@ inline string Produkt::getNazwa() { return nazwa; }
 inline string Produkt::getProducent() { return producent; }
 inline double Produkt::getCena() { return cena; }
 inline size_t Produkt::getIlosc() { return ilosc; }
+inline string Produkt::getJednostka() { return jednostka; }
 
 inline void Produkt::setNazwa(string n) { nazwa = n; }
 inline void Produkt::setCena(double c) { cena = c; }
 inline void Produkt::setIlosc(size_t i) { ilosc = i; }
 inline void Produkt::setProducent(string p) { producent = p; }
+inline void Produkt::setJednostka(string j) { jednostka = j; }
+
 
 
 
