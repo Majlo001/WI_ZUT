@@ -17,15 +17,15 @@ void listaZadanPracownicyMenu(Pracownik*& pracownik, size_t& rozmiar, size_t ind
         int choice;
         int indexZad;
 
-        cout << "<======= MENU LISTA ZADAÑ PRACOWNIKÓW =======>" << endl << endl;
+        cout << "<======= MENU LISTA ZADAï¿½ PRACOWNIKï¿½W =======>" << endl << endl;
         cout << "Pracownik: " << pracownik[index].getID() << " " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << endl << endl;
-        cout << "1. Poka¿ listê zadañ" << endl;
-        cout << "2. Dodaj do listy zadañ" << endl;
-        cout << "3. Usuñ z listy zadañ po indeksie" << endl;
-        cout << "4. Usuñ ca³¹ listê zadañ" << endl;
-        cout << "0. Wróæ do g³ównego menu" << endl << endl;
+        cout << "1. Pokaï¿½ listï¿½ zadaï¿½" << endl;
+        cout << "2. Dodaj do listy zadaï¿½" << endl;
+        cout << "3. Usuï¿½ z listy zadaï¿½ po indeksie" << endl;
+        cout << "4. Usuï¿½ caï¿½ï¿½ listï¿½ zadaï¿½" << endl;
+        cout << "0. Wrï¿½ï¿½ do gï¿½ï¿½wnego menu" << endl << endl;
         cout << "<============================================>" << endl << endl;
-        cout << "Wybierz funkcjê: ";
+        cout << "Wybierz funkcjï¿½: ";
         cin >> choice;
 
 
@@ -48,7 +48,7 @@ void listaZadanPracownicyMenu(Pracownik*& pracownik, size_t& rozmiar, size_t ind
             programExit = 0;
             break;
         default:
-            cout << "B³¹d, coœ posz³o nie tak" << endl;
+            cout << "Bï¿½ï¿½d, coï¿½ poszï¿½o nie tak" << endl;
             break;
         }
         cout << endl;
@@ -74,14 +74,14 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
         cout << "<======= MENU PRACOWNICY =======>" << endl << endl;
         cout << "1. Tworzenie bazy pracownika" << endl;
         cout << "2. Usuwanie pracownika" << endl;
-        cout << "3. Lista pracowników" << endl;
+        cout << "3. Lista pracownikï¿½w" << endl;
         cout << "4. Dodaj nowego pracownika" << endl;
-        cout << "5. Statystyki pracowników" << endl;
+        cout << "5. Statystyki pracownikï¿½w" << endl;
         cout << "6. Zmaina wynagrodzenia pracownika" << endl;
-        cout << "7. Lista zadañ pracownika" << endl;
-        cout << "0. Wróæ do g³ównego menu" << endl << endl;
+        cout << "7. Lista zadaï¿½ pracownika" << endl;
+        cout << "0. Wrï¿½ï¿½ do gï¿½ï¿½wnego menu" << endl << endl;
         cout << "<===============================>" << endl << endl;
-        cout << "Wybierz funkcjê: ";
+        cout << "Wybierz funkcjï¿½: ";
         cin >> choice;
 
 
@@ -91,7 +91,7 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
             ini(pracownicy, rozmiar);
             break;
         case(2):
-            cout << "Indeks pracownika do usuniêcia: ";
+            cout << "Indeks pracownika do usuniï¿½cia: ";
             cin >> index;
             usun(pracownicy, rozmiar, index);
             break;
@@ -106,7 +106,7 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
                 statystykiPracownikow(pracownicy, rozmiar);
             }
             else {
-                cout << "Brak pracowników" << endl;
+                cout << "Brak pracownikï¿½w" << endl;
             }
             break;
         case(6):
@@ -114,7 +114,7 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
                 zmianaWynagordzenia(pracownicy);
             }
             else {
-                cout << "Brak pracowników" << endl;
+                cout << "Brak pracownikï¿½w" << endl;
             }
             break;
         case(7):
@@ -129,7 +129,7 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
             programExit = 0;
             break;
         default:
-            cout << "B³¹d, coœ posz³o nie tak" << endl;
+            cout << "Bï¿½ï¿½d, coï¿½ poszï¿½o nie tak" << endl;
             break;
         }
         cout << endl;
@@ -152,16 +152,16 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
         int index;
 
         cout << "<======= MENU Produkty =======>" << endl << endl;
-        cout << "1. Tworzenie bazy produktów" << endl;
-        cout << "2. Usuwanie produktów" << endl;
-        cout << "3. Lista produktów" << endl;
+        cout << "1. Tworzenie bazy produktï¿½w" << endl;
+        cout << "2. Usuwanie produktï¿½w" << endl;
+        cout << "3. Lista produktï¿½w" << endl;
         cout << "4. Dodaj nowy produkt" << endl;
-        //cout << "5. Statystyki produktów" << endl;
+        //cout << "5. Statystyki produktï¿½w" << endl;
         cout << "6. Zmiana ceny produktu" << endl;
-        cout << "7. Dodawanie iloœci produktu" << endl;
-        cout << "0. Wróæ do g³ównego menu" << endl << endl;
+        cout << "7. Dodawanie iloï¿½ci produktu" << endl;
+        cout << "0. Wrï¿½ï¿½ do gï¿½ï¿½wnego menu" << endl << endl;
         cout << "<=============================>" << endl << endl;
-        cout << "Wybierz funkcjê: ";
+        cout << "Wybierz funkcjï¿½: ";
         cin >> choice;
 
 
@@ -171,7 +171,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
             ini(produkty, rozmiarProd);
             break;
         case(2):
-            cout << "Indeks produktu do usuniêcia: ";
+            cout << "Indeks produktu do usuniï¿½cia: ";
             cin >> index;
             usun(produkty, rozmiarProd, index);
             break;
@@ -186,7 +186,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
                     statystykiPracownikow(produkty, rozmiarProd);
                 }
                 else {
-                    cout << "Brak produktów" << endl;
+                    cout << "Brak produktï¿½w" << endl;
                 }
                 break;*/
         case(6):
@@ -194,7 +194,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
                 zmianaCeny(produkty);
             }
             else {
-                cout << "Brak produktów" << endl;
+                cout << "Brak produktï¿½w" << endl;
             }
             break;
         case(7):
@@ -203,7 +203,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
                 produkty[index]->dodajIloscProduktu();
             }
             else {
-                cout << "Brak produktów" << endl;
+                cout << "Brak produktï¿½w" << endl;
             }
             break;
         case(7):
@@ -212,7 +212,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
                 produkty[index]->dodajIloscProduktu();
             }
             else {
-                cout << "Brak produktów" << endl;
+                cout << "Brak produktï¿½w" << endl;
             }
             break;
         case(0):
@@ -220,7 +220,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
             programExit = 0;
             break;
         default:
-            cout << "B³¹d, coœ posz³o nie tak" << endl;
+            cout << "Bï¿½ï¿½d, coï¿½ poszï¿½o nie tak" << endl;
             break;
         }
         cout << endl;
@@ -243,19 +243,19 @@ void mainMenu() {
 
     size_t rozmiarPrac = 3;
     size_t rozmiarProd = 3;
-    
+
 
 
     do {
         int choice;
 
         cout << "<======= MENU SKLEPU =======>" << endl << endl;
-        cout << "1. Zarz¹dzanie pracownikami" << endl;
-        cout << "2. Zarz¹dzanie produktami" << endl;
-        cout << "3. Dziennik logów" << endl;
+        cout << "1. Zarzï¿½dzanie pracownikami" << endl;
+        cout << "2. Zarzï¿½dzanie produktami" << endl;
+        cout << "3. Dziennik logï¿½w" << endl;
         cout << "0. Wyjscie z programu" << endl << endl;
         cout << "<===========================>" << endl << endl;
-        cout << "Wybierz funkcjê: ";
+        cout << "Wybierz funkcjï¿½: ";
         cin >> choice;
 
 
@@ -274,7 +274,7 @@ void mainMenu() {
             programExit = 0;
             break;
         default:
-            cout << "B³¹d, coœ posz³o nie tak" << endl;
+            cout << "Bï¿½ï¿½d, coï¿½ poszï¿½o nie tak" << endl;
             break;
         }
         cout << endl;
