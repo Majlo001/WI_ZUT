@@ -6,6 +6,7 @@
 #include <string>
 #include <cassert>
 #include "Pracownik.h"
+#include "Utilities.h"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ Pracownik& Pracownik::operator=(const Pracownik& pracownik) {
 
     stworz(listaZadan, iloscZadan);
     if (iloscZadan > 0) {
-        for (int i = 0; i < iloscZadan; i++) {
+        for (size_t i = 0; i < iloscZadan; i++) {
             listaZadan[i]->setOpis(listaZadan[i]->getOpis());
             listaZadan[i]->setZrobione(listaZadan[i]->getZrobione());
         }
@@ -58,7 +59,7 @@ Pracownik::Pracownik(const Pracownik& pracownik) : id{ pracownik.id } {
 
     stworz(this->listaZadan, this->iloscZadan);
     if (iloscZadan > 0) {
-        for (int i = 0; i < iloscZadan; i++) {
+        for (size_t i = 0; i < iloscZadan; i++) {
             listaZadan[i]->setOpis(listaZadan[i]->getOpis());
             listaZadan[i]->setZrobione(listaZadan[i]->getZrobione());
         }
@@ -67,9 +68,6 @@ Pracownik::Pracownik(const Pracownik& pracownik) : id{ pracownik.id } {
 
 
 
-double randWynagrodzenie(int max, int var) {
-    return rand() % max + var;
-}
 
 
 void stworz(Pracownik*& pracownik) {
@@ -78,9 +76,9 @@ void stworz(Pracownik*& pracownik) {
 void stworz(Pracownik**& pracownik) {
     pracownik = new Pracownik*;
 }
-void stworz(Pracownik*& pracownik, const size_t rozmiar) {
-    pracownik = new Pracownik[rozmiar];
-}
+//void stworz(Pracownik*& pracownik, const size_t rozmiar) {
+//    pracownik = new Pracownik[rozmiar];
+//}
 void stworz(Pracownik**& pracownicy, const size_t rozmiar) {
     pracownicy = new Pracownik * [rozmiar];
     for (size_t ind = 0; ind < rozmiar; ind++)
@@ -90,7 +88,6 @@ void stworz(Pracownik**& pracownicy, const size_t rozmiar) {
 
 void ini(Pracownik*& pracownik) {
     string s;
-    double d;
     cout << "WprowadŸ imie pracownika: ";
     cin >> s;
     pracownik->setImie(s);

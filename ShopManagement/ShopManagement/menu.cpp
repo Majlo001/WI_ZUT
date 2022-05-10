@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "Pracownik.h"
 #include "Produkty.h"
+#include "Utilities.h"
 
 using namespace std;
 
@@ -157,6 +158,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
         cout << "4. Dodaj nowy produkt" << endl;
         //cout << "5. Statystyki produktów" << endl;
         cout << "6. Zmiana ceny produktu" << endl;
+        cout << "7. Dodawanie iloœci produktu" << endl;
         cout << "0. Wróæ do g³ównego menu" << endl << endl;
         cout << "<=============================>" << endl << endl;
         cout << "Wybierz funkcjê: ";
@@ -169,7 +171,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
             ini(produkty, rozmiarProd);
             break;
         case(2):
-            cout << "Indeks pracownika do usuniêcia: ";
+            cout << "Indeks produktu do usuniêcia: ";
             cin >> index;
             usun(produkty, rozmiarProd, index);
             break;
@@ -192,7 +194,25 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
                 zmianaCeny(produkty);
             }
             else {
-                cout << "Brak pracowników" << endl;
+                cout << "Brak produktów" << endl;
+            }
+            break;
+        case(7):
+            if (produkty != nullptr) {
+                cout << "Podaj indeks produktu: "; cin >> index;
+                produkty[index]->dodajIloscProduktu();
+            }
+            else {
+                cout << "Brak produktów" << endl;
+            }
+            break;
+        case(7):
+            if (produkty != nullptr) {
+                cout << "Podaj indeks produktu: "; cin >> index;
+                produkty[index]->dodajIloscProduktu();
+            }
+            else {
+                cout << "Brak produktów" << endl;
             }
             break;
         case(0):
@@ -223,6 +243,8 @@ void mainMenu() {
 
     size_t rozmiarPrac = 3;
     size_t rozmiarProd = 3;
+    
+
 
     do {
         int choice;
@@ -230,6 +252,7 @@ void mainMenu() {
         cout << "<======= MENU SKLEPU =======>" << endl << endl;
         cout << "1. Zarz¹dzanie pracownikami" << endl;
         cout << "2. Zarz¹dzanie produktami" << endl;
+        cout << "3. Dziennik logów" << endl;
         cout << "0. Wyjscie z programu" << endl << endl;
         cout << "<===========================>" << endl << endl;
         cout << "Wybierz funkcjê: ";

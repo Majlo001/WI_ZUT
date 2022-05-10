@@ -58,6 +58,26 @@ public:
 };
 
 
+template <class T> void stworz(T*& obj, const size_t n) {
+    obj = new T[n];
+    cout << "Dzia³a";
+}
+
+template <class T> void bubbleSort(T a[], size_t n) {
+    for (int i = 0; i < n - 1; i++)
+        for (int j = n - 1; i < j; j--)
+            if (a[j] < a[j - 1]) {
+                T tmp = a[j];
+                a[j] = a[j - 1];
+                a[j - 1] = tmp;
+            }
+}
+template <class T> T max(T& a, T& b) {
+    return(a > b) ? a : b;
+}
+
+
+
 
 inline int Pracownik::getID() { return id; }
 inline string Pracownik::getImie() { return imie; }
@@ -82,10 +102,9 @@ inline void Pracownik::Zadania::setZrobione(bool z) { zrobione = z; }
 int idPracownika();
 
 
-double randWynagrodzenie(int max, int var);
 void stworz(Pracownik*& pracownik);
 void stworz(Pracownik**& pracownik);
-void stworz(Pracownik*& pracownik, const size_t rozmiar);
+//void stworz(Pracownik*& pracownik, const size_t rozmiar);
 void stworz(Pracownik**& pracownicy, const size_t rozmiar);
 //void stworz(Zadania**& listaZadan, const size_t rozmiar);
 

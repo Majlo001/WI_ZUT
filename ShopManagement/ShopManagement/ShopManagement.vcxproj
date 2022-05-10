@@ -143,10 +143,12 @@
     <ClCompile Include="funkcje_produkt.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="ShopManagement.cpp" />
+    <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pracownik.h" />
     <ClInclude Include="Produkty.h" />
+    <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

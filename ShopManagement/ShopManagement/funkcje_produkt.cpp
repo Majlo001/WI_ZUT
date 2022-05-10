@@ -3,24 +3,12 @@
 #include <cstdlib>
 #include <algorithm>
 #include "Produkty.h"
+#include "Utilities.h"
 
 using namespace std;
 
 
 
-string randSKU() {
-    static const char alphanum[] =
-        "0123456789"
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    string sku;
-    sku.reserve(8);
-
-    for (int i = 0; i < 8; ++i) {
-        sku += alphanum[rand() % (sizeof(alphanum) - 1)];
-    }
-
-    return sku;
-}
 
 Produkt::Produkt() : id{ idProduktu() }, sku{ randSKU() } {};
 Produkt::Produkt(string nazwa, double cena, size_t ilosc, string producent) : id{ idProduktu() }, sku{ randSKU() } {
@@ -30,6 +18,9 @@ Produkt::Produkt(string nazwa, double cena, size_t ilosc, string producent) : id
     this->producent = producent;
 }
 
+Produkt::~Produkt() {
+    delete this;
+}
 
 
 void stworz(Produkt**& produkty) {
@@ -37,24 +28,35 @@ void stworz(Produkt**& produkty) {
 }
 void stworz(Produkt**& produkty, const size_t rozmiar) {
     produkty = new Produkt * [rozmiar];
-    for (size_t ind = 0; ind < rozmiar; ind++)
-        produkty[ind] = new Produkt;
+    for (size_t ind = 0; ind < rozmiar; ind++) {
+        int tmp = rand() % 3 + 1;
+
+        if (tmp == 1) {
+            produkty[ind] = new ProduktNaWage;
+        }
+        else if (tmp == 2) {
+            produkty[ind] = new ProduktNaSztuki;
+        }
+        else {
+            produkty[ind] = new ProduktNaObjetosc;
+        }
+    }
 }
 void ini(Produkt** produkty, const size_t rozmiar) {
     string s;
     size_t ilosc;
     double cena;
     for (size_t ind = 0; ind < rozmiar; ind++) {
-        cout << "WprowadŸ nazwê produktu: ";
+        cout << "Wprowadï¿½ nazwï¿½ produktu: ";
         cin >> s;
         produkty[ind]->setNazwa(s);
-        cout << "WprowadŸ nazwê producenta: ";
+        cout << "Wprowadï¿½ nazwï¿½ producenta: ";
         cin >> s;
         produkty[ind]->setProducent(s);
-        cout << "WprowadŸ cenê produktu: ";
+        cout << "Wprowadï¿½ cenï¿½ produktu: ";
         cin >> cena;
         produkty[ind]->setCena(cena);
-        cout << "WprowadŸ iloœæ produktów: ";
+        cout << "Wprowadï¿½ iloï¿½ï¿½ produktï¿½w: ";
         cin >> ilosc;
         produkty[ind]->setIlosc(ilosc);
     }
@@ -64,27 +66,43 @@ void dodaj(Produkt**& produkty, size_t& size) {
     size_t ilosc;
     double cena;
     Produkt** temp = new Produkt * [size + 1];
+
+
+    cout << "Wprowadï¿½ jednostkï¿½ produktu: ";
+    cin >> s;
+
     if (size == 0) {
-        temp[size] = new Produkt;
+        if (s == "kg")
+            temp[size] = new ProduktNaWage;
+        else if (s == "szt")
+            temp[size] = new ProduktNaSztuki;
+        else
+            temp[size] = new ProduktNaObjetosc;
     }
     else {
         for (size_t i = 0; i < size; ++i)
             temp[i] = produkty[i];
-        temp[size] = new Produkt;
+        if (s == "kg")
+            temp[size] = new ProduktNaWage;
+        else if (s == "szt")
+            temp[size] = new ProduktNaSztuki;
+        else
+            temp[size] = new ProduktNaObjetosc;
         delete[] produkty;
     }
     produkty = temp;
 
-    cout << "WprowadŸ nazwê produktu: ";
+
+    cout << "Wprowadï¿½ nazwï¿½ produktu: ";
     cin >> s;
     produkty[size]->setNazwa(s);
-    cout << "WprowadŸ nazwê producenta: ";
+    cout << "Wprowadï¿½ nazwï¿½ producenta: ";
     cin >> s;
     produkty[size]->setProducent(s);
-    cout << "WprowadŸ cenê produktu: ";
+    cout << "Wprowadï¿½ cenï¿½ produktu: ";
     cin >> cena;
     produkty[size]->setCena(cena);
-    cout << "WprowadŸ iloœæ produktów: ";
+    cout << "Wprowadï¿½ iloï¿½ï¿½ produktï¿½w: ";
     cin >> ilosc;
     produkty[size]->setIlosc(ilosc);
 
@@ -93,7 +111,7 @@ void dodaj(Produkt**& produkty, size_t& size) {
 void print(Produkt** produkty, const size_t rozmiar) {
     cout << "<======= Produkty =======>" << endl;
     for (size_t ind = 0; ind < rozmiar; ind++) {
-        cout << produkty[ind]->getID() << "\t" << produkty[ind]->getSKU() << "\t" << produkty[ind]->getNazwa() << "\t" << produkty[ind]->getProducent() << "\t" << produkty[ind]->getCena() << "\t" << produkty[ind]->getIlosc() << endl;
+        cout << produkty[ind]->getID() << "\t" << produkty[ind]->getSKU() << "\t" << produkty[ind]->getNazwa() << "\t" << produkty[ind]->getProducent() << "\t" << produkty[ind]->getCena() << "\t" << produkty[ind]->getIlosc() << produkty[ind]->getJednostka() << endl;
     }
 }
 void usun(Produkt**& produkty, size_t& rozmiar) {
@@ -117,19 +135,19 @@ void usun(Produkt**& produkty, size_t& size, size_t index) {
         --size;
     }
     else
-        cout << "ERROR: Index jest nieprawid³owy ! " << endl;
+        cout << "ERROR: Index jest nieprawidï¿½owy ! " << endl;
 }
 void zmianaCeny(Produkt**& produkty) {
-    int index, choice;
+    int index;
     double cena = 0;
 
-    cout << "Indeks pracownika do zmiany wynagrodzenia: ";
+    cout << "Indeks pracownika do zmiany ceny: ";
     cin >> index;
 
     cout << endl << "Produkt: " << produkty[index]->getSKU() << " " << produkty[index]->getNazwa() << endl;
     cout << "Cena: " << produkty[index]->getCena() << endl << endl;
 
-    cout << "WprowadŸ now¹ cenê: "; cin >> cena;
+    cout << "Wprowadï¿½ nowï¿½ cenï¿½: "; cin >> cena;
     produkty[index]->setCena(cena);
 
     if (cena != 0) {
