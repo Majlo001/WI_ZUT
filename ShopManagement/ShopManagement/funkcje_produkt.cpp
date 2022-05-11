@@ -47,16 +47,16 @@ void ini(Produkt** produkty, const size_t rozmiar) {
     size_t ilosc;
     double cena;
     for (size_t ind = 0; ind < rozmiar; ind++) {
-        cout << "Wprowad� nazw� produktu: ";
+        cout << "Wprowadź nazwę produktu: ";
         cin >> s;
         produkty[ind]->setNazwa(s);
-        cout << "Wprowad� nazw� producenta: ";
+        cout << "Wprowadź cenę produktu: ";
         cin >> s;
         produkty[ind]->setProducent(s);
-        cout << "Wprowad� cen� produktu: ";
+        cout << "Wprowadź cenę produktu: ";
         cin >> cena;
         produkty[ind]->setCena(cena);
-        cout << "Wprowad� ilo�� produkt�w: ";
+        cout << "Wprowadź ilość produktów: ";
         cin >> ilosc;
         produkty[ind]->setIlosc(ilosc);
     }
@@ -68,7 +68,7 @@ void dodaj(Produkt**& produkty, size_t& size) {
     Produkt** temp = new Produkt * [size + 1];
 
 
-    cout << "Wprowad� jednostk� produktu: ";
+    cout << "Wprowadź jednostkę produktu: ";
     cin >> s;
 
     if (size == 0) {
@@ -93,16 +93,16 @@ void dodaj(Produkt**& produkty, size_t& size) {
     produkty = temp;
 
 
-    cout << "Wprowad� nazw� produktu: ";
+    cout << "Wprowadź nazwę produktu: ";
     cin >> s;
     produkty[size]->setNazwa(s);
-    cout << "Wprowad� nazw� producenta: ";
+    cout << "Wprowadź nazwę producenta: ";
     cin >> s;
     produkty[size]->setProducent(s);
-    cout << "Wprowad� cen� produktu: ";
+    cout << "Wprowadź cenę produktu: ";
     cin >> cena;
     produkty[size]->setCena(cena);
-    cout << "Wprowad� ilo�� produkt�w: ";
+    cout << "Wprowadź ilość produktów: ";
     cin >> ilosc;
     produkty[size]->setIlosc(ilosc);
 
@@ -135,7 +135,7 @@ void usun(Produkt**& produkty, size_t& size, size_t index) {
         --size;
     }
     else
-        cout << "ERROR: Index jest nieprawid�owy ! " << endl;
+        cout << "ERROR: Index jest nieprawidłowy ! " << endl;
 }
 void zmianaCeny(Produkt**& produkty) {
     int index;
@@ -147,7 +147,7 @@ void zmianaCeny(Produkt**& produkty) {
     cout << endl << "Produkt: " << produkty[index]->getSKU() << " " << produkty[index]->getNazwa() << endl;
     cout << "Cena: " << produkty[index]->getCena() << endl << endl;
 
-    cout << "Wprowad� now� cen�: "; cin >> cena;
+    cout << "Wprowadź nową cenę: "; cin >> cena;
     produkty[index]->setCena(cena);
 
     if (cena != 0) {

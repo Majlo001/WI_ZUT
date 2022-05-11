@@ -351,7 +351,10 @@ void maxZarobki(Pracownik* pracownik, const size_t rozmiar) {
     int index = 0;
 
     for (size_t i = 0; i < rozmiar; i++) {
-        if (pracownik[i].getWynagrodzenie() > pracownik[index].getWynagrodzenie()) {
+        /*if (pracownik[i].getWynagrodzenie() > pracownik[index].getWynagrodzenie()) {
+            index = i;
+        }*/
+        if (pracownik[i].getWynagrodzenie() == max(pracownik[i].getWynagrodzenie(),pracownik[index].getWynagrodzenie())) {
             index = i;
         }
     }

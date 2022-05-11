@@ -64,9 +64,9 @@ template <class T> void stworz(T*& obj, const size_t n) {
 }
 
 template <class T> void bubbleSort(T a[], size_t n) {
-    for (int i = 0; i < n - 1; i++)
-        for (int j = n - 1; i < j; j--)
-            if (a[j] < a[j - 1]) {
+    for (size_t i = 0; i < n - 1; i++)
+        for (size_t j = n - 1; i < j; j--)
+            if (a[j].getNazwisko() < a[j - 1].getNazwisko()) {
                 T tmp = a[j];
                 a[j] = a[j - 1];
                 a[j - 1] = tmp;
