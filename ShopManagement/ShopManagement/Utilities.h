@@ -33,6 +33,9 @@ public:
 
 
 double randWynagrodzenie(int max, int var);
+double randCena();
+size_t randIlosc();
+
 string randSKU();
 
 

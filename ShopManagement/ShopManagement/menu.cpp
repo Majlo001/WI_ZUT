@@ -1,9 +1,11 @@
-#include <iostream>
+﻿#include <iostream>
 #include <locale>
 #include <cstdlib>
+#include <vector>
 #include "Pracownik.h"
 #include "Produkty.h"
 #include "Utilities.h"
+
 
 using namespace std;
 
@@ -89,7 +91,6 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
         case(1):
             stworz(pracownicy, rozmiar);
             ini(pracownicy, rozmiar);
-            //bubbleSort<Pracownik>(pracownicy, rozmiar);
             break;
         case(2):
             cout << "Indeks pracownika do usunięcia: ";
@@ -143,7 +144,7 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
 
     } while (programExit != 0);
 }
-void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
+void produktyMenu(vector<Produkt*>& produkty, size_t& rozmiarProd) {
     setlocale(LC_CTYPE, "Polish");
 
     int programExit = 1;
@@ -157,7 +158,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
         cout << "2. Usuwanie produktów" << endl;
         cout << "3. Lista produktów" << endl;
         cout << "4. Dodaj nowy produkt" << endl;
-        //cout << "5. Statystyki produkt�w" << endl;
+        //cout << "5. Statystyki produktów" << endl;
         cout << "6. Zmiana ceny produktu" << endl;
         cout << "7. Dodawanie ilości produktu" << endl;
         cout << "0. Wróć do głównego menu" << endl << endl;
@@ -168,30 +169,29 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
 
         switch (choice) {
         case(1):
-            stworz(produkty, rozmiarProd);
-            ini(produkty, rozmiarProd);
+            stworz(produkty);
             break;
         case(2):
             cout << "Indeks produktu do usunięcia: ";
             cin >> index;
-            usun(produkty, rozmiarProd, index);
+            usun(produkty, index);
             break;
         case(3):
-            print(produkty, rozmiarProd);
+            print(produkty);
             break;
         case(4):
-            dodaj(produkty, rozmiarProd);
+            dodaj(produkty);
             break;
             /*case(5):
                 if (produkty != nullptr) {
                     statystykiPracownikow(produkty, rozmiarProd);
                 }
                 else {
-                    cout << "Brak produkt�w" << endl;
+                    cout << "Brak produktów" << endl;
                 }
                 break;*/
         case(6):
-            if (produkty != nullptr) {
+            if (!produkty.empty()) {
                 zmianaCeny(produkty);
             }
             else {
@@ -199,7 +199,7 @@ void produktyMenu(Produkt**& produkty, size_t& rozmiarProd) {
             }
             break;
         case(7):
-            if (produkty != nullptr) {
+            if (!produkty.empty()) {
                 cout << "Podaj indeks produktu: "; cin >> index;
                 produkty[index]->dodajIloscProduktu();
             }
@@ -231,7 +231,7 @@ void mainMenu() {
 
     int programExit = 1;
     Pracownik* pracownicy = nullptr;
-    Produkt** produkty = nullptr;
+    vector<Produkt*> produkty;
 
     size_t rozmiarPrac = 3;
     size_t rozmiarProd = 3;
@@ -262,7 +262,7 @@ void mainMenu() {
             break;
         case(0):
             usun(pracownicy, rozmiarPrac);
-            usun(produkty, rozmiarProd);
+            produkty.erase(produkty.begin(), produkty.end());
             programExit = 0;
             break;
         default:

@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <locale>
 #include <cstdlib>
 #include <algorithm>
@@ -88,26 +88,26 @@ void stworz(Pracownik**& pracownicy, const size_t rozmiar) {
 
 void ini(Pracownik*& pracownik) {
     string s;
-    cout << "WprowadŸ imie pracownika: ";
+    cout << "WprowadÅº imie pracownika: ";
     cin >> s;
     pracownik->setImie(s);
-    cout << "WprowadŸ nazwisko pracownika: ";
+    cout << "WprowadÅº nazwisko pracownika: ";
     cin >> s;
     pracownik->setNazwisko(s);
-    cout << "WprowadŸ stanowisko pracownika: ";
+    cout << "WprowadÅº stanowisko pracownika: ";
     cin >> s;
     pracownik->setStanowisko(s);
     pracownik->setWynagrodzenie(randWynagrodzenie(5000, 3000));
 }
 void ini(Pracownik& pracownik) {
     string s;
-    cout << "WprowadŸ imie pracownika: ";
+    cout << "WprowadÅº imie pracownika: ";
     cin >> s;
     pracownik.setImie(s);
-    cout << "WprowadŸ nazwisko pracownika: ";
+    cout << "WprowadÅº nazwisko pracownika: ";
     cin >> s;
     pracownik.setNazwisko(s);
-    cout << "WprowadŸ stanowisko pracownika: ";
+    cout << "WprowadÅº stanowisko pracownika: ";
     cin >> s;
     pracownik.setStanowisko(s);
     pracownik.setWynagrodzenie(randWynagrodzenie(5000, 3000));
@@ -117,13 +117,13 @@ void ini(Pracownik* pracownik, const size_t rozmiar) {
     for (size_t ind = 0; ind < rozmiar; ind++) {
         pracownik[ind].setWynagrodzenie(randWynagrodzenie(5000, 3000));
 
-        cout << "WprowadŸ imie pracownika: ";
+        cout << "WprowadÅº imie pracownika: ";
         cin >> s;
         pracownik[ind].setImie(s);
-        cout << "WprowadŸ nazwisko pracownika: ";
+        cout << "WprowadÅº nazwisko pracownika: ";
         cin >> s;
         pracownik[ind].setNazwisko(s);
-        cout << "WprowadŸ stanowisko pracownika: ";
+        cout << "WprowadÅº stanowisko pracownika: ";
         cin >> s;
         pracownik[ind].setStanowisko(s);
     }
@@ -133,13 +133,13 @@ void ini(Pracownik** pracownicy, const size_t rozmiar) {
     for (size_t ind = 0; ind < rozmiar; ind++) {
         pracownicy[ind]->setWynagrodzenie(randWynagrodzenie(5000, 3000));
 
-        cout << "WprowadŸ imie pracownika: ";
+        cout << "WprowadÅº imie pracownika: ";
         cin >> s;
         pracownicy[ind]->setImie(s);
-        cout << "WprowadŸ nazwisko pracownika: ";
+        cout << "WprowadÅº nazwisko pracownika: ";
         cin >> s;
         pracownicy[ind]->setNazwisko(s);
-        cout << "WprowadŸ stanowisko pracownika: ";
+        cout << "WprowadÅº stanowisko pracownika: ";
         cin >> s;
         pracownicy[ind]->setStanowisko(s);
     }
@@ -161,13 +161,13 @@ void dodaj(Pracownik**& pracownicyAll, size_t& size) {
     pracownicyAll = temp;
 
     pracownicyAll[size]->setWynagrodzenie(randWynagrodzenie(5000, 3000));
-    cout << "WprowadŸ imie pracownika: ";
+    cout << "WprowadÅº imie pracownika: ";
     cin >> s;
     pracownicyAll[size]->setImie(s);
-    cout << "WprowadŸ nazwisko pracownika: ";
+    cout << "WprowadÅº nazwisko pracownika: ";
     cin >> s;
     pracownicyAll[size]->setNazwisko(s);
-    cout << "WprowadŸ stanowisko pracownika: ";
+    cout << "WprowadÅº stanowisko pracownika: ";
     cin >> s;
     pracownicyAll[size]->setStanowisko(s);
 
@@ -183,13 +183,13 @@ void dodaj(Pracownik*& pracownicyAll, size_t& size) {
     pracownicyAll = temp;
 
     pracownicyAll[size].setWynagrodzenie(randWynagrodzenie(5000, 3000));
-    cout << "WprowadŸ imie pracownika: ";
+    cout << "WprowadÅº imie pracownika: ";
     cin >> s;
     pracownicyAll[size].setImie(s);
-    cout << "WprowadŸ nazwisko pracownika: ";
+    cout << "WprowadÅº nazwisko pracownika: ";
     cin >> s;
     pracownicyAll[size].setNazwisko(s);
-    cout << "WprowadŸ stanowisko pracownika: ";
+    cout << "WprowadÅº stanowisko pracownika: ";
     cin >> s;
     pracownicyAll[size].setStanowisko(s);
 
@@ -247,7 +247,7 @@ void usun(Pracownik*& pracownicyAll, size_t& size, size_t index) {
         --size;
     }
     else
-        cout << "ERROR: Index jest nieprawid³owy ! " << endl;
+        cout << "ERROR: Index jest nieprawidÅ‚owy ! " << endl;
 }
 void usun(Pracownik**& pracownicyAll, size_t& size, size_t index) {
     if (index < size) {
@@ -263,7 +263,7 @@ void usun(Pracownik**& pracownicyAll, size_t& size, size_t index) {
         --size;
     }
     else
-        cout << "ERROR: Index jest nieprawid³owy ! " << endl;
+        cout << "ERROR: Index jest nieprawidÅ‚owy ! " << endl;
 }
 
 
@@ -277,7 +277,7 @@ void stanowiskaPracy(Pracownik* pracownik, const size_t rozmiar) {
     sort(stanowiska.begin(), stanowiska.end());
     stanowiska.erase(unique(stanowiska.begin(), stanowiska.end()), stanowiska.end());
 
-    cout << endl << "Stanowiska pracy, iloœæ pracowników i ich œrednie wynagrodzenie: " << endl;
+    cout << endl << "Stanowiska pracy, iloÅ›Ä‡ pracownikÃ³w i ich Å›rednie wynagrodzenie: " << endl;
     for (size_t i = 0; i < stanowiska.size(); i++) {
         int count = 0;
         double srednia = 0;
@@ -301,7 +301,7 @@ void stanowiskaPracy(Pracownik** pracownik, const size_t rozmiar) {
     sort(stanowiska.begin(), stanowiska.end());
     stanowiska.erase(unique(stanowiska.begin(), stanowiska.end()), stanowiska.end());
 
-    cout << endl << "Stanowiska pracy, iloœæ pracowników i ich œrednie wynagrodzenie: " << endl;
+    cout << endl << "Stanowiska pracy, iloÅ›Ä‡ pracownikÃ³w i ich Å›rednie wynagrodzenie: " << endl;
     for (size_t i = 0; i < stanowiska.size(); i++) {
         int count = 0;
         double srednia = 0;
@@ -320,14 +320,14 @@ void wyplaty(Pracownik* pracownik, const size_t rozmiar) {
     for (size_t i = 0; i < rozmiar; i++) {
         wyplaty += pracownik[i].getWynagrodzenie();
     }
-    cout << "Wydatki na wyp³aty: " << wyplaty << endl;
+    cout << "Wydatki na wypÅ‚aty: " << wyplaty << endl;
 }
 void wyplaty(Pracownik** pracownik, const size_t rozmiar) {
     double wyplaty = 0;
     for (size_t i = 0; i < rozmiar; i++) {
         wyplaty += pracownik[i]->getWynagrodzenie();
     }
-    cout << "Wydatki na wyp³aty: " << wyplaty << endl;
+    cout << "Wydatki na wypÅ‚aty: " << wyplaty << endl;
 }
 void sredniaZarobkow(Pracownik* pracownik, const size_t rozmiar) {
     double sredniaZar = 0;
@@ -336,7 +336,7 @@ void sredniaZarobkow(Pracownik* pracownik, const size_t rozmiar) {
         sredniaZar += pracownik[i].getWynagrodzenie();
     }
     cout << endl;
-    cout << "Œrednia zarobków pracowników: " << (sredniaZar / rozmiar) << endl;
+    cout << "Åšrednia zarobkÃ³w pracownikÃ³w: " << (sredniaZar / rozmiar) << endl;
 }
 void sredniaZarobkow(Pracownik** pracownik, const size_t rozmiar) {
     double sredniaZar = 0;
@@ -345,7 +345,7 @@ void sredniaZarobkow(Pracownik** pracownik, const size_t rozmiar) {
         sredniaZar += pracownik[i]->getWynagrodzenie();
     }
     cout << endl;
-    cout << "Œrednia zarobków pracowników: " << (sredniaZar / rozmiar) << endl;
+    cout << "Åšrednia zarobkÃ³w pracownikÃ³w: " << (sredniaZar / rozmiar) << endl;
 }
 void maxZarobki(Pracownik* pracownik, const size_t rozmiar) {
     int index = 0;
@@ -358,7 +358,7 @@ void maxZarobki(Pracownik* pracownik, const size_t rozmiar) {
             index = i;
         }
     }
-    cout << endl << "Najwy¿sze zarobki: " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << " " << pracownik[index].getWynagrodzenie() << " " << pracownik[index].getStanowisko() << endl;
+    cout << endl << "NajwyÅ¼sze zarobki: " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << " " << pracownik[index].getWynagrodzenie() << " " << pracownik[index].getStanowisko() << endl;
 }
 void maxZarobki(Pracownik** pracownik, const size_t rozmiar) {
     int index = 0;
@@ -368,7 +368,7 @@ void maxZarobki(Pracownik** pracownik, const size_t rozmiar) {
             index = i;
         }
     }
-    cout << endl << "Najwy¿sze zarobki: " << pracownik[index]->getImie() << " " << pracownik[index]->getNazwisko() << " " << pracownik[index]->getWynagrodzenie() << " " << pracownik[index]->getStanowisko() << endl;
+    cout << endl << "NajwyÅ¼sze zarobki: " << pracownik[index]->getImie() << " " << pracownik[index]->getNazwisko() << " " << pracownik[index]->getWynagrodzenie() << " " << pracownik[index]->getStanowisko() << endl;
 }
 void minZarobki(Pracownik* pracownik, const size_t rozmiar) {
     int index = 0;
@@ -378,7 +378,7 @@ void minZarobki(Pracownik* pracownik, const size_t rozmiar) {
             index = i;
         }
     }
-    cout << "Najni¿sze zarobki: " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << " " << pracownik[index].getWynagrodzenie() << " " << pracownik[index].getStanowisko() << endl;
+    cout << "NajniÅ¼sze zarobki: " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << " " << pracownik[index].getWynagrodzenie() << " " << pracownik[index].getStanowisko() << endl;
 }
 void minZarobki(Pracownik** pracownik, const size_t rozmiar) {
     int index = 0;
@@ -388,13 +388,13 @@ void minZarobki(Pracownik** pracownik, const size_t rozmiar) {
             index = i;
         }
     }
-    cout << "Najni¿sze zarobki: " << pracownik[index]->getImie() << " " << pracownik[index]->getNazwisko() << " " << pracownik[index]->getWynagrodzenie() << " " << pracownik[index]->getStanowisko() << endl;
+    cout << "NajniÅ¼sze zarobki: " << pracownik[index]->getImie() << " " << pracownik[index]->getNazwisko() << " " << pracownik[index]->getWynagrodzenie() << " " << pracownik[index]->getStanowisko() << endl;
 }
 void statystykiPracownikow(Pracownik* pracownik, const size_t rozmiar) {
-    cout << endl << "<======= Statystyki pracowników =======>" << endl << endl;
+    cout << endl << "<======= Statystyki pracownikÃ³w =======>" << endl << endl;
 
     if (pracownik != nullptr) {
-        cout << "Iloœæ pracowników: " << rozmiar;
+        cout << "IloÅ›Ä‡ pracownikÃ³w: " << rozmiar;
     }
 
     sredniaZarobkow(pracownik, rozmiar);
@@ -404,10 +404,10 @@ void statystykiPracownikow(Pracownik* pracownik, const size_t rozmiar) {
     stanowiskaPracy(pracownik, rozmiar);
 }
 void statystykiPracownikow(Pracownik** pracownik, const size_t rozmiar) {
-    cout << endl << "<======= Statystyki pracowników =======>" << endl << endl;
+    cout << endl << "<======= Statystyki pracownikÃ³w =======>" << endl << endl;
 
     if (pracownik != nullptr) {
-        cout << "Iloœæ pracowników: " << rozmiar;
+        cout << "IloÅ›Ä‡ pracownikÃ³w: " << rozmiar;
     }
     sredniaZarobkow(pracownik, rozmiar);
     wyplaty(pracownik, rozmiar);
@@ -428,25 +428,25 @@ void zmianaWynagordzenia(Pracownik** pracownik) {
     cout << "Stanowisko: " << pracownik[index]->getStanowisko() << endl;
     cout << "Wynagrodzenie: " << pracownik[index]->getWynagrodzenie() << endl << endl;
 
-    cout << "Zmniejszyæ, czy zwiekszyæ wynagrodzenie? " << endl;
-    cout << "Zmniejszyæ - 0 " << endl;
-    cout << "Zwiêkszyæ - 1 " << endl;
-    cout << "Twój wybór: ";
+    cout << "ZmniejszyÄ‡, czy zwiekszyÄ‡ wynagrodzenie? " << endl;
+    cout << "ZmniejszyÄ‡ - 0 " << endl;
+    cout << "ZwiÄ™kszyÄ‡ - 1 " << endl;
+    cout << "TwÃ³j wybÃ³r: ";
     cin >> choice;
 
     switch (choice) {
     case(0):
-        cout << endl << "O jak¹ kwotê zmniejszyæ wynagrodzenie: ";
+        cout << endl << "O jakÄ… kwotÄ™ zmniejszyÄ‡ wynagrodzenie: ";
         cin >> kwota;
         pracownik[index]->setWynagrodzenie(pracownik[index]->getWynagrodzenie() - kwota);
         break;
     case(1):
-        cout << endl << "O jak¹ kwotê zwiêkszyæ wynagrodzenie: ";
+        cout << endl << "O jakÄ… kwotÄ™ zwiÄ™kszyÄ‡ wynagrodzenie: ";
         cin >> kwota;
         pracownik[index]->setWynagrodzenie(pracownik[index]->getWynagrodzenie() + kwota);
         break;
     default:
-        cout << endl << "Coœ posz³o nie tak, spróbuj ponownie." << endl;
+        cout << endl << "CoÅ› poszÅ‚o nie tak, sprÃ³buj ponownie." << endl;
         break;
     }
 
@@ -468,25 +468,25 @@ void zmianaWynagordzenia(Pracownik* pracownik) {
     cout << "Stanowisko: " << pracownik[index].getStanowisko() << endl;
     cout << "Wynagrodzenie: " << pracownik[index].getWynagrodzenie() << endl << endl;
 
-    cout << "Zmniejszyæ, czy zwiekszyæ wynagrodzenie? " << endl;
-    cout << "Zmniejszyæ - 0 " << endl;
-    cout << "Zwiêkszyæ - 1 " << endl;
-    cout << "Twój wybór: ";
+    cout << "ZmniejszyÄ‡, czy zwiekszyÄ‡ wynagrodzenie? " << endl;
+    cout << "ZmniejszyÄ‡ - 0 " << endl;
+    cout << "ZwiÄ™kszyÄ‡ - 1 " << endl;
+    cout << "TwÃ³j wybÃ³r: ";
     cin >> choice;
 
     switch (choice) {
     case(0):
-        cout << endl << "O jak¹ kwotê zmniejszyæ wynagrodzenie: ";
+        cout << endl << "O jakÄ… kwotÄ™ zmniejszyÄ‡ wynagrodzenie: ";
         cin >> kwota;
         pracownik[index].setWynagrodzenie(pracownik[index].getWynagrodzenie() - kwota);
         break;
     case(1):
-        cout << endl << "O jak¹ kwotê zwiêkszyæ wynagrodzenie: ";
+        cout << endl << "O jakÄ… kwotÄ™ zwiÄ™kszyÄ‡ wynagrodzenie: ";
         cin >> kwota;
         pracownik[index].setWynagrodzenie(pracownik[index].getWynagrodzenie() + kwota);
         break;
     default:
-        cout << endl << "Coœ posz³o nie tak, spróbuj ponownie." << endl;
+        cout << endl << "CoÅ› poszÅ‚o nie tak, sprÃ³buj ponownie." << endl;
         break;
     }
 
@@ -529,7 +529,7 @@ void Pracownik::dodaj() {
 
 
     cin.ignore();
-    cout << "WprowadŸ opis zadania: ";
+    cout << "WprowadÅº opis zadania: ";
     getline(cin, s, '\n');
     listaZadan[iloscZadan]->setOpis(s);
 
@@ -537,9 +537,9 @@ void Pracownik::dodaj() {
 }
 void Pracownik::print() {
     setlocale(LC_CTYPE, "Polish");
-    cout << "<======= Lista Zadañ =======>" << endl;
+    cout << "<======= Lista ZadaÅ„ =======>" << endl;
     if (iloscZadan == 0) {
-        cout << "Brak rekordów" << endl;
+        cout << "Brak rekordÃ³w" << endl;
     }
     for (size_t ind = 0; ind < iloscZadan; ind++) {
         cout << listaZadan[ind]->getZrobione() << "\t" << listaZadan[ind]->getOpis() << endl;
@@ -566,5 +566,5 @@ void Pracownik::usun(size_t index) {
         --iloscZadan;
     }
     else
-        cout << "ERROR: Index jest nieprawid³owy ! " << endl;
+        cout << "ERROR: Index jest nieprawidÅ‚owy ! " << endl;
 }

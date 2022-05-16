@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include <iostream>
 #include <locale>
 #include <cstdlib>
@@ -12,7 +12,7 @@ class Pracownik {
     class Zadania {
         friend class Pracownik;
 
-        string opis{ "Przyk≥adowy opis" };
+        string opis{ "Przyk≈Çadowy opis" };
         bool zrobione{ false };
     public:
         string getOpis();
@@ -45,7 +45,7 @@ public:
     void setWynagrodzenie(double);
     void setIloscZadan(size_t);
 
-    //Prze≥adowanie operatorÛw
+    //Prze≈Çadowanie operator√≥w
     Pracownik& operator=(const Pracownik& pracownik);
     friend ostream& operator<<(ostream& out, const Pracownik& pracownik);
     auto& operator[](int index);
@@ -60,7 +60,7 @@ public:
 
 template <class T> void stworz(T*& obj, const size_t n) {
     obj = new T[n];
-    cout << "Dzia≥a";
+    cout << "Dzia≈Ça";
 }
 
 template <class T> void bubbleSort(T a[], size_t n) {

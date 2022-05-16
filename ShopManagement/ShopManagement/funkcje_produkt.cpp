@@ -1,6 +1,7 @@
-#include <iostream>
+﻿#include <iostream>
 #include <locale>
 #include <cstdlib>
+#include <vector>
 #include <algorithm>
 #include "Produkty.h"
 #include "Utilities.h"
@@ -23,121 +24,65 @@ Produkt::~Produkt() {
 }
 
 
-void stworz(Produkt**& produkty) {
-    produkty = new Produkt*;
-}
-void stworz(Produkt**& produkty, const size_t rozmiar) {
-    produkty = new Produkt * [rozmiar];
-    for (size_t ind = 0; ind < rozmiar; ind++) {
-        int tmp = rand() % 3 + 1;
+void stworz(vector<Produkt*>& produkty) {
+    string nazwa, producent;
+    size_t ilosc = randIlosc();
+    double cena = randCena();
+    int tmp = rand() % 3 + 1;
 
-        if (tmp == 1) {
-            produkty[ind] = new ProduktNaWage;
-        }
-        else if (tmp == 2) {
-            produkty[ind] = new ProduktNaSztuki;
-        }
-        else {
-            produkty[ind] = new ProduktNaObjetosc;
-        }
+    cout << "Wprowadź nazwę produktu: ";
+    cin >> nazwa;
+    cout << "Wprowadź nazwę producenta: ";
+    cin >> producent;
+
+    if (tmp == 1) {
+        produkty.push_back(new ProduktNaWage(nazwa, cena, ilosc, producent));
+    }
+    else if (tmp == 2) {
+        produkty.push_back(new ProduktNaSztuki(nazwa, cena, ilosc, producent));
+    }
+    else {
+        produkty.push_back(new ProduktNaObjetosc(nazwa, cena, ilosc, producent));
     }
 }
-void ini(Produkt** produkty, const size_t rozmiar) {
-    string s;
-    size_t ilosc;
-    double cena;
-    for (size_t ind = 0; ind < rozmiar; ind++) {
-        cout << "Wprowadź nazwę produktu: ";
-        cin >> s;
-        produkty[ind]->setNazwa(s);
-        cout << "Wprowadź cenę produktu: ";
-        cin >> s;
-        produkty[ind]->setProducent(s);
-        cout << "Wprowadź cenę produktu: ";
-        cin >> cena;
-        produkty[ind]->setCena(cena);
-        cout << "Wprowadź ilość produktów: ";
-        cin >> ilosc;
-        produkty[ind]->setIlosc(ilosc);
-    }
-}
-void dodaj(Produkt**& produkty, size_t& size) {
-    string s;
-    size_t ilosc;
-    double cena;
-    Produkt** temp = new Produkt * [size + 1];
+void dodaj(vector<Produkt*>& produkty) {
+    string nazwa, producent, s;
+    size_t ilosc = randIlosc();
+    double cena = randCena();
+    int tmp = rand() % 3 + 1;
 
-
+    cout << "Wprowadź nazwę produktu: ";
+    cin >> nazwa;
+    cout << "Wprowadź nazwę producenta: ";
+    cin >> producent;
     cout << "Wprowadź jednostkę produktu: ";
     cin >> s;
 
-    if (size == 0) {
-        if (s == "kg")
-            temp[size] = new ProduktNaWage;
-        else if (s == "szt")
-            temp[size] = new ProduktNaSztuki;
-        else
-            temp[size] = new ProduktNaObjetosc;
-    }
-    else {
-        for (size_t i = 0; i < size; ++i)
-            temp[i] = produkty[i];
-        if (s == "kg")
-            temp[size] = new ProduktNaWage;
-        else if (s == "szt")
-            temp[size] = new ProduktNaSztuki;
-        else
-            temp[size] = new ProduktNaObjetosc;
-        delete[] produkty;
-    }
-    produkty = temp;
-
-
-    cout << "Wprowadź nazwę produktu: ";
-    cin >> s;
-    produkty[size]->setNazwa(s);
-    cout << "Wprowadź nazwę producenta: ";
-    cin >> s;
-    produkty[size]->setProducent(s);
-    cout << "Wprowadź cenę produktu: ";
-    cin >> cena;
-    produkty[size]->setCena(cena);
-    cout << "Wprowadź ilość produktów: ";
-    cin >> ilosc;
-    produkty[size]->setIlosc(ilosc);
-
-    size++;
+    if (s == "kg")
+        produkty.push_back(new ProduktNaWage(nazwa, cena, ilosc, producent));
+    else if (s == "szt")
+        produkty.push_back(new ProduktNaSztuki(nazwa, cena, ilosc, producent));
+    else
+        produkty.push_back(new ProduktNaObjetosc(nazwa, cena, ilosc, producent));
 }
-void print(Produkt** produkty, const size_t rozmiar) {
+void print(vector<Produkt*>& produkty) {
+    setlocale(LC_CTYPE, "Polish");
     cout << "<======= Produkty =======>" << endl;
-    for (size_t ind = 0; ind < rozmiar; ind++) {
+    for (size_t ind = 0; ind < produkty.size(); ind++) {
         cout << produkty[ind]->getID() << "\t" << produkty[ind]->getSKU() << "\t" << produkty[ind]->getNazwa() << "\t" << produkty[ind]->getProducent() << "\t" << produkty[ind]->getCena() << "\t" << produkty[ind]->getIlosc() << produkty[ind]->getJednostka() << endl;
     }
 }
-void usun(Produkt**& produkty, size_t& rozmiar) {
-    for (size_t ind = 0; ind < rozmiar; ind++)
-        delete produkty[ind];
-    delete[] produkty;
-    produkty = nullptr;
-    rozmiar = 0;
+void usun(vector<Produkt*>& produkty) {
+    produkty.erase(produkty.begin(), produkty.end());
 }
-void usun(Produkt**& produkty, size_t& size, size_t index) {
-    if (index < size) {
-        Produkt** temp = new Produkt * [size - 1];
-        short int j{ -1 };
-        for (size_t i = 0; i < size; ++i)
-            if (i != index) {
-                ++j;
-                temp[j] = produkty[i];
-            }
-        delete[] produkty;
-        produkty = temp;
-        --size;
+void usun(vector<Produkt*>& produkty, size_t index) {
+    if (index < produkty.size()) {
+        produkty.erase(produkty.begin() + index);
     }
     else
         cout << "ERROR: Index jest nieprawidłowy ! " << endl;
 }
-void zmianaCeny(Produkt**& produkty) {
+void zmianaCeny(vector<Produkt*>& produkty) {
     int index;
     double cena = 0;
 

@@ -1,8 +1,9 @@
-#pragma once
+﻿#pragma once
 
 #include <iostream>
 #include <locale>
 #include <cstdlib>
+#include <vector>
 #include "Utilities.h"
 
 using namespace std;
@@ -36,17 +37,20 @@ public:
     void setJednostka(string);
 };
 
-class ProduktNaWage : public Produkt{
+class ProduktNaWage : public Produkt {
 public:
     ProduktNaWage() {
         setJednostka("kg");
     }
+    ProduktNaWage(string nazwa, double cena, size_t ilosc, string producent) : Produkt(nazwa, cena, ilosc, producent) {
+        this->setJednostka("kg");
+    };
     virtual ~ProduktNaWage() {}
     virtual void dodajIloscProduktu() {
         size_t ilosc = getIlosc();
         size_t dodanaIlosc;
-        cout << "Podaj ilo�� do dodania do " << getNazwa() << ": "; cin >> dodanaIlosc;
-        logbook("Dodano " + to_string(dodanaIlosc) + " kilogram�w produktu " + getNazwa());
+        cout << "Podaj ilość do dodania do " << getNazwa() << ": "; cin >> dodanaIlosc;
+        logbook("Dodano " + to_string(dodanaIlosc) + " kilogramów produktu " + getNazwa());
         setIlosc(dodanaIlosc + ilosc);
     }
 };
@@ -55,11 +59,14 @@ public:
     ProduktNaSztuki() {
         setJednostka("szt");
     }
+    ProduktNaSztuki(string nazwa, double cena, size_t ilosc, string producent) : Produkt(nazwa, cena, ilosc, producent) {
+        setJednostka("szt");
+    };
     virtual ~ProduktNaSztuki() {}
     virtual void dodajIloscProduktu() {
         size_t ilosc = getIlosc();
         size_t dodanaIlosc;
-        cout << "Podaj ilo�� do dodania do " << getNazwa() << ": "; cin >> dodanaIlosc;
+        cout << "Podaj ilość do dodania do " << getNazwa() << ": "; cin >> dodanaIlosc;
         logbook("Dodano " + to_string(dodanaIlosc) + " sztuk produktu " + getNazwa());
         setIlosc(dodanaIlosc + ilosc);
     }
@@ -70,12 +77,15 @@ public:
     ProduktNaObjetosc() {
         setJednostka("l");
     }
+    ProduktNaObjetosc(string nazwa, double cena, size_t ilosc, string producent) : Produkt(nazwa, cena, ilosc, producent) {
+        setJednostka("l");
+    };
     virtual ~ProduktNaObjetosc() {}
     virtual void dodajIloscProduktu() {
         size_t ilosc = getIlosc();
         size_t dodanaIlosc;
-        cout << "Podaj ilo�� do dodania do " << getNazwa() << ": "; cin >> dodanaIlosc;
-        logbook("Dodano "+ to_string(dodanaIlosc) +" litr�w produktu "+getNazwa());
+        cout << "Podaj ilość do dodania do " << getNazwa() << ": "; cin >> dodanaIlosc;
+        logbook("Dodano " + to_string(dodanaIlosc) + " litrów produktu " + getNazwa());
         setIlosc(dodanaIlosc + ilosc);
     }
 };
@@ -97,15 +107,13 @@ inline void Produkt::setJednostka(string j) { jednostka = j; }
 
 
 
-void stworz(Produkt**& produkty);
-void stworz(Produkt**& produkty, const size_t rozmiar);
-void ini(Produkt** produkty, const size_t rozmiar);
-void dodaj(Produkt**& produkty, size_t& size);
-void print(Produkt** produkty, const size_t rozmiar);
-//void usun(Produkt**& produkty);
-void usun(Produkt**& produkty, size_t& rozmiar);
-void usun(Produkt**& produkty, size_t& size, size_t index);
-void zmianaCeny(Produkt**& produkty);
+void stworz(vector<Produkt*>& produkty);
+void dodaj(vector<Produkt*>& produkty);
+void print(vector<Produkt*>& produkty);
+
+void usun(vector<Produkt*>& produkty);
+void usun(vector<Produkt*>& produkty, size_t index);
+void zmianaCeny(vector<Produkt*>& produkty);
 
 
 int idProduktu();

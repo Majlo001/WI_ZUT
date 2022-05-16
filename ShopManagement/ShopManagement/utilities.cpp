@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <locale>
 #include <cstdlib>
 #include <algorithm>
@@ -13,6 +13,13 @@
 double randWynagrodzenie(int max, int var) {
     return rand() % max + var;
 }
+double randCena() {
+    return ((rand() % 5000 + 4500) / 100) * 1.0;
+}
+size_t randIlosc() {
+    return (rand() % 20000 + 199);
+}
+
 
 string randSKU() {
     static const char alphanum[] =
@@ -44,6 +51,6 @@ void logbook(string s) {
         logbook << (1900 + now.tm_year) << '/' << (now.tm_mon + 1) << '/' << now.tm_mday << " " <<  now.tm_hour << ":" << now.tm_min << ":" << now.tm_sec <<  " \t|\t" << s << endl;
         logbook.close();
     } else {
-        cout << "Nie mo¿na otworzyæ pliku" << endl;
+        cout << "Nie moÅ¼na otworzyÄ‡ pliku" << endl;
     }
 }
