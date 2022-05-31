@@ -19,9 +19,7 @@ Produkt::Produkt(string nazwa, double cena, size_t ilosc, string producent) : id
     this->producent = producent;
 }
 
-Produkt::~Produkt() {
-    delete this;
-}
+Produkt::~Produkt() {}
 
 
 void stworz(vector<Produkt*>& produkty) {
@@ -73,10 +71,12 @@ void print(vector<Produkt*>& produkty) {
     }
 }
 void usun(vector<Produkt*>& produkty) {
+    delVec(produkty);
     produkty.erase(produkty.begin(), produkty.end());
 }
 void usun(vector<Produkt*>& produkty, size_t index) {
     if (index < produkty.size()) {
+        delete produkty[index];
         produkty.erase(produkty.begin() + index);
     }
     else

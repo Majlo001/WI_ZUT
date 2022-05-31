@@ -154,7 +154,7 @@ void produktyMenu(vector<Produkt*>& produkty, size_t& rozmiarProd) {
         int index;
 
         cout << "<======= MENU Produkty =======>" << endl << endl;
-        cout << "1. Tworzenie bazy produkt�w" << endl;
+        cout << "1. Tworzenie bazy produktów" << endl;
         cout << "2. Usuwanie produktów" << endl;
         cout << "3. Lista produktów" << endl;
         cout << "4. Dodaj nowy produkt" << endl;

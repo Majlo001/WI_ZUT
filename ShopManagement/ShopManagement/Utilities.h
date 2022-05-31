@@ -40,3 +40,11 @@ string randSKU();
 
 
 void logbook(string s);
+
+template<class T> void delVec(vector<T*> t)
+{
+    for (auto it = t.begin(); it != t.end(); it++)
+    {
+        delete* it;
+    }
+}
