@@ -102,6 +102,67 @@ void zmianaCeny(vector<Produkt*>& produkty) {
     }
 }
 
+void statystykiProduktow(vector<Produkt*> produkty) {
+    if (!produkty.empty()) {
+        int maxCid = maxCenaProd(produkty);
+        int minCid = minCenaProd(produkty);
+        int maxLid = maxIlProd(produkty);
+        int minLid = minIlProd(produkty);
+
+        cout << "Maksymalna cena produktu to " << produkty[maxCid]->getCena() << " PLN za " << produkty[maxCid]->getNazwa() << " " << produkty[maxCid]->getSKU() << endl;
+        cout << "Minimalna cena produktu to " << produkty[minCid]->getCena() << " PLN za " << produkty[minCid]->getNazwa() << " " << produkty[minCid]->getSKU() << endl;
+        cout << endl;
+        cout << "Maksymalna ilość produktów to " << produkty[maxLid]->getIlosc() << " za " << produkty[maxLid]->getNazwa() << " " << produkty[maxLid]->getSKU() << endl;
+        cout << "Minimalna ilość produktów to " << produkty[minLid]->getIlosc() << " za " << produkty[minLid]->getNazwa() << " " << produkty[minLid]->getSKU() << endl;
+    } else {
+        cout << "Brak produktów" << endl;
+    }
+}
+int maxCenaProd(vector<Produkt*> produkty) {
+    size_t max = produkty[0]->getCena();
+    int index = 1;
+    for_each(produkty.begin(), produkty.end(), [&max, &index](Produkt* produkty){
+        if (produkty->getCena() > max){
+            max = produkty->getCena();
+            index = produkty->getID();
+        }
+        });
+    return index - 1;
+}
+int minCenaProd(vector<Produkt*> produkty) {
+    size_t min = produkty[0]->getCena();
+    int index = 1;
+    for_each(produkty.begin(), produkty.end(), [&min, &index](Produkt* produkty) {
+        if (produkty->getCena() < min) {
+            min = produkty->getCena();
+            index = produkty->getID();
+        }
+    });
+    return index-1;
+}
+int maxIlProd(vector<Produkt*> produkty){
+    size_t max = produkty[0]->getIlosc();
+    int index = 1;
+    for_each(produkty.begin(), produkty.end(), [&max, &index](Produkt* produkty) {
+        if (produkty->getIlosc() > max) {
+            max = produkty->getIlosc();
+            index = produkty->getID();
+        }
+        });
+    return index - 1;
+}
+int minIlProd(vector<Produkt*> produkty){
+    size_t min = produkty[0]->getIlosc();
+    int index = 1;
+    for_each(produkty.begin(), produkty.end(), [&min, &index](Produkt* produkty) {
+        if (produkty->getIlosc() < min) {
+            min = produkty->getIlosc();
+            index = produkty->getID();
+        }
+        });
+    return index - 1;
+}
+
 
 int idProduktu() {
     static int id = 0;

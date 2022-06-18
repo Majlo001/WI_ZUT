@@ -115,5 +115,10 @@ void usun(vector<Produkt*>& produkty);
 void usun(vector<Produkt*>& produkty, size_t index);
 void zmianaCeny(vector<Produkt*>& produkty);
 
+void statystykiProduktow(vector<Produkt*> produkty);
+int maxCenaProd(vector<Produkt*> produkty);
+int minCenaProd(vector<Produkt*> produkty);
+int maxIlProd(vector<Produkt*> produkty);
+int minIlProd(vector<Produkt*> produkty);
 
 int idProduktu();

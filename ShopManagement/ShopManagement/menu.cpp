@@ -158,7 +158,7 @@ void produktyMenu(vector<Produkt*>& produkty, size_t& rozmiarProd) {
         cout << "2. Usuwanie produktów" << endl;
         cout << "3. Lista produktów" << endl;
         cout << "4. Dodaj nowy produkt" << endl;
-        //cout << "5. Statystyki produktów" << endl;
+        cout << "5. Statystyki produktów" << endl;
         cout << "6. Zmiana ceny produktu" << endl;
         cout << "7. Dodawanie ilości produktu" << endl;
         cout << "0. Wróć do głównego menu" << endl << endl;
@@ -182,14 +182,9 @@ void produktyMenu(vector<Produkt*>& produkty, size_t& rozmiarProd) {
         case(4):
             dodaj(produkty);
             break;
-            /*case(5):
-                if (produkty != nullptr) {
-                    statystykiPracownikow(produkty, rozmiarProd);
-                }
-                else {
-                    cout << "Brak produktów" << endl;
-                }
-                break;*/
+        case(5):
+            statystykiProduktow(produkty);
+            break;
         case(6):
             if (!produkty.empty()) {
                 zmianaCeny(produkty);
@@ -231,6 +226,7 @@ void mainMenu() {
 
     int programExit = 1;
     Pracownik* pracownicy = nullptr;
+    //vector <Pracownik> pracownicy;
     vector<Produkt*> produkty;
 
     size_t rozmiarPrac = 3;
