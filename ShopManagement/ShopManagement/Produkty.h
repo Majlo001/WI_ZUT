@@ -4,6 +4,7 @@
 #include <locale>
 #include <cstdlib>
 #include <vector>
+#include <memory>
 #include "Utilities.h"
 
 using namespace std;
@@ -107,18 +108,18 @@ inline void Produkt::setJednostka(string j) { jednostka = j; }
 
 
 
-void stworz(vector<Produkt*>& produkty);
-void dodaj(vector<Produkt*>& produkty);
-void print(vector<Produkt*>& produkty);
+void stworz(vector<shared_ptr<Produkt>>& produkty);
+void dodaj(vector<shared_ptr<Produkt>>& produkty);
+void print(vector<shared_ptr<Produkt>>& produkty);
 
-void usun(vector<Produkt*>& produkty);
-void usun(vector<Produkt*>& produkty, size_t index);
-void zmianaCeny(vector<Produkt*>& produkty);
+void usun(vector<shared_ptr<Produkt>>& produkty);
+void usun(vector<shared_ptr<Produkt>>& produkty, size_t index);
+void zmianaCeny(vector<shared_ptr<Produkt>>& produkty);
 
-void statystykiProduktow(vector<Produkt*> produkty);
-int maxCenaProd(vector<Produkt*> produkty);
-int minCenaProd(vector<Produkt*> produkty);
-int maxIlProd(vector<Produkt*> produkty);
-int minIlProd(vector<Produkt*> produkty);
+void statystykiProduktow(vector<shared_ptr<Produkt>> produkty);
+int maxCenaProd(vector<shared_ptr<Produkt>> produkty);
+int minCenaProd(vector<shared_ptr<Produkt>> produkty);
+int maxIlProd(vector<shared_ptr<Produkt>> produkty);
+int minIlProd(vector<shared_ptr<Produkt>> produkty);
 
 int idProduktu();

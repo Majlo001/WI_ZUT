@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
+#include <memory>
 #include "Produkty.h"
 #include "Utilities.h"
 
@@ -22,7 +23,7 @@ Produkt::Produkt(string nazwa, double cena, size_t ilosc, string producent) : id
 Produkt::~Produkt() {}
 
 
-void stworz(vector<Produkt*>& produkty) {
+void stworz(vector<shared_ptr<Produkt>>& produkty) {
     string nazwa, producent;
     size_t ilosc = randIlosc();
     double cena = randCena();
@@ -34,20 +35,19 @@ void stworz(vector<Produkt*>& produkty) {
     cin >> producent;
 
     if (tmp == 1) {
-        produkty.push_back(new ProduktNaWage(nazwa, cena, ilosc, producent));
+        produkty.push_back(make_shared<ProduktNaWage>(nazwa, cena, ilosc, producent));
     }
     else if (tmp == 2) {
-        produkty.push_back(new ProduktNaSztuki(nazwa, cena, ilosc, producent));
+        produkty.push_back(make_shared<ProduktNaSztuki>(nazwa, cena, ilosc, producent));
     }
     else {
-        produkty.push_back(new ProduktNaObjetosc(nazwa, cena, ilosc, producent));
+        produkty.push_back(make_shared<ProduktNaObjetosc>(nazwa, cena, ilosc, producent));
     }
 }
-void dodaj(vector<Produkt*>& produkty) {
+void dodaj(vector<shared_ptr<Produkt>>& produkty) {
     string nazwa, producent, s;
     size_t ilosc = randIlosc();
     double cena = randCena();
-    int tmp = rand() % 3 + 1;
 
     cout << "Wprowadź nazwę produktu: ";
     cin >> nazwa;
@@ -57,32 +57,32 @@ void dodaj(vector<Produkt*>& produkty) {
     cin >> s;
 
     if (s == "kg")
-        produkty.push_back(new ProduktNaWage(nazwa, cena, ilosc, producent));
+        produkty.push_back(make_shared<ProduktNaWage>(nazwa, cena, ilosc, producent));
     else if (s == "szt")
-        produkty.push_back(new ProduktNaSztuki(nazwa, cena, ilosc, producent));
+        produkty.push_back(make_shared<ProduktNaSztuki>(nazwa, cena, ilosc, producent));
     else
-        produkty.push_back(new ProduktNaObjetosc(nazwa, cena, ilosc, producent));
+        produkty.push_back(make_shared<ProduktNaObjetosc>(nazwa, cena, ilosc, producent));
 }
-void print(vector<Produkt*>& produkty) {
+void print(vector<shared_ptr<Produkt>>& produkty) {
     setlocale(LC_CTYPE, "Polish");
     cout << "<======= Produkty =======>" << endl;
     for (size_t ind = 0; ind < produkty.size(); ind++) {
         cout << produkty[ind]->getID() << "\t" << produkty[ind]->getSKU() << "\t" << produkty[ind]->getNazwa() << "\t" << produkty[ind]->getProducent() << "\t" << produkty[ind]->getCena() << "\t" << produkty[ind]->getIlosc() << produkty[ind]->getJednostka() << endl;
     }
 }
-void usun(vector<Produkt*>& produkty) {
-    delVec(produkty);
+void usun(vector<shared_ptr<Produkt>>& produkty) {
+    //delVec(produkty);
     produkty.erase(produkty.begin(), produkty.end());
 }
-void usun(vector<Produkt*>& produkty, size_t index) {
+void usun(vector<shared_ptr<Produkt>>& produkty, size_t index) {
     if (index < produkty.size()) {
-        delete produkty[index];
+        //delete produkty[index];
         produkty.erase(produkty.begin() + index);
     }
     else
         cout << "ERROR: Index jest nieprawidłowy ! " << endl;
 }
-void zmianaCeny(vector<Produkt*>& produkty) {
+void zmianaCeny(vector<shared_ptr<Produkt>>& produkty) {
     int index;
     double cena = 0;
 
@@ -102,7 +102,7 @@ void zmianaCeny(vector<Produkt*>& produkty) {
     }
 }
 
-void statystykiProduktow(vector<Produkt*> produkty) {
+void statystykiProduktow(vector<shared_ptr<Produkt>> produkty) {
     if (!produkty.empty()) {
         int maxCid = maxCenaProd(produkty);
         int minCid = minCenaProd(produkty);
@@ -118,10 +118,10 @@ void statystykiProduktow(vector<Produkt*> produkty) {
         cout << "Brak produktów" << endl;
     }
 }
-int maxCenaProd(vector<Produkt*> produkty) {
+int maxCenaProd(vector<shared_ptr<Produkt>> produkty) {
     size_t max = produkty[0]->getCena();
     int index = 1;
-    for_each(produkty.begin(), produkty.end(), [&max, &index](Produkt* produkty){
+    for_each(produkty.begin(), produkty.end(), [&max, &index](shared_ptr<Produkt> produkty){
         if (produkty->getCena() > max){
             max = produkty->getCena();
             index = produkty->getID();
@@ -129,10 +129,10 @@ int maxCenaProd(vector<Produkt*> produkty) {
         });
     return index - 1;
 }
-int minCenaProd(vector<Produkt*> produkty) {
+int minCenaProd(vector<shared_ptr<Produkt>> produkty) {
     size_t min = produkty[0]->getCena();
     int index = 1;
-    for_each(produkty.begin(), produkty.end(), [&min, &index](Produkt* produkty) {
+    for_each(produkty.begin(), produkty.end(), [&min, &index](shared_ptr<Produkt> produkty) {
         if (produkty->getCena() < min) {
             min = produkty->getCena();
             index = produkty->getID();
@@ -140,10 +140,10 @@ int minCenaProd(vector<Produkt*> produkty) {
     });
     return index-1;
 }
-int maxIlProd(vector<Produkt*> produkty){
+int maxIlProd(vector<shared_ptr<Produkt>> produkty){
     size_t max = produkty[0]->getIlosc();
     int index = 1;
-    for_each(produkty.begin(), produkty.end(), [&max, &index](Produkt* produkty) {
+    for_each(produkty.begin(), produkty.end(), [&max, &index](shared_ptr<Produkt> produkty) {
         if (produkty->getIlosc() > max) {
             max = produkty->getIlosc();
             index = produkty->getID();
@@ -151,10 +151,10 @@ int maxIlProd(vector<Produkt*> produkty){
         });
     return index - 1;
 }
-int minIlProd(vector<Produkt*> produkty){
+int minIlProd(vector<shared_ptr<Produkt>> produkty){
     size_t min = produkty[0]->getIlosc();
     int index = 1;
-    for_each(produkty.begin(), produkty.end(), [&min, &index](Produkt* produkty) {
+    for_each(produkty.begin(), produkty.end(), [&min, &index](shared_ptr<Produkt> produkty) {
         if (produkty->getIlosc() < min) {
             min = produkty->getIlosc();
             index = produkty->getID();

@@ -2,6 +2,7 @@
 #include <locale>
 #include <cstdlib>
 #include <vector>
+#include <memory>
 #include "Pracownik.h"
 #include "Produkty.h"
 #include "Utilities.h"
@@ -144,7 +145,7 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
 
     } while (programExit != 0);
 }
-void produktyMenu(vector<Produkt*>& produkty, size_t& rozmiarProd) {
+void produktyMenu(vector<shared_ptr<Produkt>> produkty, size_t& rozmiarProd) {
     setlocale(LC_CTYPE, "Polish");
 
     int programExit = 1;
@@ -227,7 +228,7 @@ void mainMenu() {
     int programExit = 1;
     Pracownik* pracownicy = nullptr;
     //vector <Pracownik> pracownicy;
-    vector<Produkt*> produkty;
+    vector<shared_ptr<Produkt>> produkty;
 
     size_t rozmiarPrac = 3;
     size_t rozmiarProd = 3;
