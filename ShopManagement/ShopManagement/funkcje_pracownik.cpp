@@ -75,8 +75,7 @@ Pracownik::Pracownik(const Pracownik& pracownik) : id{ pracownik.id } {
             listaZadan[i]->setZrobione(listaZadan[i]->getZrobione());
         }
     }*/
-
-    this->listaZadan.swap(listaZadan);
+    copy(pracownik.listaZadan.begin(), pracownik.listaZadan.end(), inserter(this->listaZadan, this->listaZadan.end()));
 }
 
 
