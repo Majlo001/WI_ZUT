@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <cassert>
+#include <map>
 #include "Pracownik.h"
 #include "Utilities.h"
 
@@ -19,13 +20,13 @@ Pracownik& Pracownik::operator=(const Pracownik& pracownik) {
     wynagrodzenie = pracownik.wynagrodzenie;
     iloscZadan = pracownik.iloscZadan;
 
-    stworz(listaZadan, iloscZadan);
+    /*stworz(listaZadan, iloscZadan);
     if (iloscZadan > 0) {
         for (size_t i = 0; i < iloscZadan; i++) {
             listaZadan[i]->setOpis(listaZadan[i]->getOpis());
             listaZadan[i]->setZrobione(listaZadan[i]->getZrobione());
         }
-    }
+    }*/
 
     return *this;
 }
@@ -44,7 +45,17 @@ Pracownik::Pracownik(string imie, string nazwisko, string stanowisko, double wyn
     this->nazwisko = nazwisko;
     this->stanowisko = stanowisko;
     this->wynagrodzenie = wynagrodzenie;
-    stworz(this->listaZadan, this->iloscZadan);
+    //stworz(this->listaZadan, this->iloscZadan);
+}
+
+Pracownik::Zadania::Zadania() {}
+Pracownik::Zadania::Zadania(string opis, bool zrobione) {
+    this->opis = opis;
+    this->zrobione = zrobione;
+}
+ostream& operator<<(ostream& out, Pracownik::Zadania& zadania) {
+    out << zadania.getOpis() << "/t" << zadania.getZrobione() << endl;
+    return out;
 }
 
 Pracownik::~Pracownik() {
@@ -57,25 +68,27 @@ Pracownik::Pracownik(const Pracownik& pracownik) : id{ pracownik.id } {
     this->wynagrodzenie = pracownik.wynagrodzenie;
     this->iloscZadan = pracownik.iloscZadan;
 
-    stworz(this->listaZadan, this->iloscZadan);
+    /*stworz(this->listaZadan, this->iloscZadan);
     if (iloscZadan > 0) {
         for (size_t i = 0; i < iloscZadan; i++) {
             listaZadan[i]->setOpis(listaZadan[i]->getOpis());
             listaZadan[i]->setZrobione(listaZadan[i]->getZrobione());
         }
-    }
+    }*/
+
+    this->listaZadan.swap(listaZadan);
 }
 
 
 
 
 
-void stworz(Pracownik*& pracownik) {
-    pracownik = new Pracownik;
-}
-void stworz(Pracownik**& pracownik) {
-    pracownik = new Pracownik*;
-}
+//void stworz(Pracownik*& pracownik) {
+//    pracownik = new Pracownik;
+//}
+//void stworz(Pracownik**& pracownik) {
+//    pracownik = new Pracownik*;
+//}
 //void stworz(Pracownik*& pracownik, const size_t rozmiar) {
 //    pracownik = new Pracownik[rozmiar];
 //}
@@ -506,32 +519,20 @@ int idPracownika() {
 }
 
 
-void Pracownik::stworz(Zadania**& listaZadan, const size_t rozmiar) {
-    listaZadan = new Zadania * [rozmiar];
-    for (size_t ind = 0; ind < rozmiar; ind++)
-        listaZadan[ind] = new Zadania;
-}
+//void Pracownik::stworz(set<Zadania*>& listaZadan, const size_t rozmiar) {
+//    //listaZadan = new Zadania * [rozmiar];
+//    listaZadan.insert(new Zadania);
+//    for (size_t ind = 0; ind < rozmiar; ind++)
+//        listaZadan.insert(new Zadania);
+//}
 void Pracownik::dodaj() {
     setlocale(LC_CTYPE, "Polish");
     string s;
-    Zadania** temp = new Zadania * [iloscZadan + 1];
-    if (iloscZadan == 0) {
-        temp[iloscZadan] = new Zadania;
-    }
-    else {
-        for (size_t i = 0; i < iloscZadan; ++i)
-            temp[i] = listaZadan[i];
-        temp[iloscZadan] = new Zadania;
-        delete[] listaZadan;
-    }
-    listaZadan = temp;
-
-
-
     cin.ignore();
     cout << "Wprowadź opis zadania: ";
     getline(cin, s, '\n');
-    listaZadan[iloscZadan]->setOpis(s);
+
+    listaZadan.insert({zadanieID(), new Zadania(s, false) });
 
     iloscZadan++;
 }
@@ -541,30 +542,23 @@ void Pracownik::print() {
     if (iloscZadan == 0) {
         cout << "Brak rekordów" << endl;
     }
-    for (size_t ind = 0; ind < iloscZadan; ind++) {
-        cout << listaZadan[ind]->getZrobione() << "\t" << listaZadan[ind]->getOpis() << endl;
+    for (auto i : listaZadan){
+        cout << i.first << "\t" << *i.second << endl;
     }
+    /*for (size_t ind = 0; ind < iloscZadan; ind++) {
+        cout << listaZadan[ind]->getZrobione() << "\t" << listaZadan[ind]->getOpis() << endl;
+    }*/
 }
 void Pracownik::usun() {
-    for (size_t ind = 0; ind < iloscZadan; ind++)
-        delete listaZadan[ind];
-    delete[] listaZadan;
-    listaZadan = nullptr;
+    listaZadan.clear();
     iloscZadan = 0;
 }
 void Pracownik::usun(size_t index) {
-    if (index < iloscZadan) {
-        Zadania** temp = new Zadania * [iloscZadan - 1];
-        short int j{ -1 };
-        for (size_t i = 0; i < iloscZadan; ++i)
-            if (i != index) {
-                ++j;
-                temp[j] = listaZadan[i];
-            }
-        delete[] listaZadan;
-        listaZadan = temp;
-        --iloscZadan;
-    }
-    else
-        cout << "ERROR: Index jest nieprawidłowy ! " << endl;
+    listaZadan.erase(index);
+}
+
+size_t zadanieID(){
+    static size_t next_id = 0;
+    next_id++;
+    return next_id;
 }

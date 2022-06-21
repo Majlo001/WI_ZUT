@@ -2,6 +2,7 @@
 #include <iostream>
 #include <locale>
 #include <cstdlib>
+#include <map>
 
 using namespace std;
 
@@ -19,6 +20,9 @@ class Pracownik {
         bool getZrobione();
         void setOpis(string);
         void setZrobione(bool);
+        Zadania();
+        Zadania(string, bool);
+        friend ostream& operator<<(ostream& out, Pracownik::Zadania& zadania);
     };
 
     const int id;
@@ -27,7 +31,8 @@ class Pracownik {
     string stanowisko;
     double wynagrodzenie;
     size_t iloscZadan{ 0 };
-    Zadania** listaZadan;
+    //Zadania** listaZadan;
+    map<size_t, Zadania*> listaZadan;
 public:
     Pracownik();
     Pracownik(string, string, string, double);
@@ -47,10 +52,11 @@ public:
 
     //Przeładowanie operatorów
     Pracownik& operator=(const Pracownik& pracownik);
-    friend ostream& operator<<(ostream& out, const Pracownik& pracownik);
+    friend ostream& operator<<(ostream&, const Pracownik&);
+    friend ostream& operator<<(ostream&, Zadania&);
     auto& operator[](int index);
 
-    void stworz(Zadania**& listaZadan, const size_t rozmiar);
+    //void stworz(map<size_t, Zadania*>& listaZadan, const size_t rozmiar);
     void usun();
     void usun(size_t index);
     void dodaj();
@@ -60,7 +66,6 @@ public:
 
 template <class T> void stworz(T*& obj, const size_t n) {
     obj = new T[n];
-    cout << "Działa";
 }
 
 template <class T> void bubbleSort(T a[], size_t n) {
@@ -139,5 +144,6 @@ void statystykiPracownikow(Pracownik** pracownik, const size_t rozmiar);
 void zmianaWynagordzenia(Pracownik** pracownik);
 void zmianaWynagordzenia(Pracownik* pracownik);
 
+size_t zadanieID();
 
 void mainMenu();
