@@ -1,12 +1,1 @@
-﻿  funkcje_pracownik.cpp
-Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\Pracownik.h(92,58): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\funkcje_pracownik.cpp(371,22): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
-Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\funkcje_pracownik.cpp(381,22): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
-Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\funkcje_pracownik.cpp(391,22): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
-Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\funkcje_pracownik.cpp(401,22): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
-  menu.cpp
-Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\Pracownik.h(92,58): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  ShopManagement.cpp
-Z:\ZUT_Shop_Management\ShopManagement\ShopManagement\Pracownik.h(92,58): warning C4267: "return": konwersja z "size_t" do "int", możliwa utrata danych
-  Generowanie kodu...
-  ShopManagement.vcxproj -> Z:\ZUT_Shop_Management\ShopManagement\x64\Debug\ShopManagement.exe
+﻿  ShopManagement.vcxproj -> Z:\ZUT_Shop_Management\ShopManagement\x64\Debug\ShopManagement.exe

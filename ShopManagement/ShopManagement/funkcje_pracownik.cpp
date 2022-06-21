@@ -6,6 +6,7 @@
 #include <string>
 #include <cassert>
 #include <map>
+#include <memory>
 #include "Pracownik.h"
 #include "Utilities.h"
 
@@ -82,228 +83,55 @@ Pracownik::Pracownik(const Pracownik& pracownik) : id{ pracownik.id } {
 
 
 
-//void stworz(Pracownik*& pracownik) {
-//    pracownik = new Pracownik;
-//}
-//void stworz(Pracownik**& pracownik) {
-//    pracownik = new Pracownik*;
-//}
-//void stworz(Pracownik*& pracownik, const size_t rozmiar) {
-//    pracownik = new Pracownik[rozmiar];
-//}
-void stworz(Pracownik**& pracownicy, const size_t rozmiar) {
-    pracownicy = new Pracownik * [rozmiar];
-    for (size_t ind = 0; ind < rozmiar; ind++)
-        pracownicy[ind] = new Pracownik;
-}
 
-
-void ini(Pracownik*& pracownik) {
-    string s;
-    cout << "Wprowadź imie pracownika: ";
-    cin >> s;
-    pracownik->setImie(s);
-    cout << "Wprowadź nazwisko pracownika: ";
-    cin >> s;
-    pracownik->setNazwisko(s);
-    cout << "Wprowadź stanowisko pracownika: ";
-    cin >> s;
-    pracownik->setStanowisko(s);
-    pracownik->setWynagrodzenie(randWynagrodzenie(5000, 3000));
-}
-void ini(Pracownik& pracownik) {
-    string s;
-    cout << "Wprowadź imie pracownika: ";
-    cin >> s;
-    pracownik.setImie(s);
-    cout << "Wprowadź nazwisko pracownika: ";
-    cin >> s;
-    pracownik.setNazwisko(s);
-    cout << "Wprowadź stanowisko pracownika: ";
-    cin >> s;
-    pracownik.setStanowisko(s);
-    pracownik.setWynagrodzenie(randWynagrodzenie(5000, 3000));
-}
-void ini(Pracownik* pracownik, const size_t rozmiar) {
-    string s;
+void stworz(vector<shared_ptr<Pracownik>>& pracownicy, const size_t rozmiar) {
+    string imie, nazw, stan;
     for (size_t ind = 0; ind < rozmiar; ind++) {
-        pracownik[ind].setWynagrodzenie(randWynagrodzenie(5000, 3000));
 
         cout << "Wprowadź imie pracownika: ";
-        cin >> s;
-        pracownik[ind].setImie(s);
+        cin >> imie;
         cout << "Wprowadź nazwisko pracownika: ";
-        cin >> s;
-        pracownik[ind].setNazwisko(s);
+        cin >> nazw;
         cout << "Wprowadź stanowisko pracownika: ";
-        cin >> s;
-        pracownik[ind].setStanowisko(s);
-    }
-}
-void ini(Pracownik** pracownicy, const size_t rozmiar) {
-    string s;
-    for (size_t ind = 0; ind < rozmiar; ind++) {
-        pracownicy[ind]->setWynagrodzenie(randWynagrodzenie(5000, 3000));
+        cin >> stan;
 
-        cout << "Wprowadź imie pracownika: ";
-        cin >> s;
-        pracownicy[ind]->setImie(s);
-        cout << "Wprowadź nazwisko pracownika: ";
-        cin >> s;
-        pracownicy[ind]->setNazwisko(s);
-        cout << "Wprowadź stanowisko pracownika: ";
-        cin >> s;
-        pracownicy[ind]->setStanowisko(s);
+        pracownicy.push_back(make_shared<Pracownik>(imie, nazw, stan, randWynagrodzenie(5000, 3000)));
     }
 }
 
 
-void dodaj(Pracownik**& pracownicyAll, size_t& size) {
-    string s;
-    Pracownik** temp = new Pracownik * [size + 1];
-    if (size == 0) {
-        temp[size] = new Pracownik;
-    }
-    else {
-        for (size_t i = 0; i < size; ++i)
-            temp[i] = pracownicyAll[i];
-        temp[size] = new Pracownik;
-        delete[] pracownicyAll;
-    }
-    pracownicyAll = temp;
+void dodaj(vector<shared_ptr<Pracownik>>& pracownicy, size_t& size) {
+    string imie, nazw, stan;
 
-    pracownicyAll[size]->setWynagrodzenie(randWynagrodzenie(5000, 3000));
     cout << "Wprowadź imie pracownika: ";
-    cin >> s;
-    pracownicyAll[size]->setImie(s);
+    cin >> imie;
     cout << "Wprowadź nazwisko pracownika: ";
-    cin >> s;
-    pracownicyAll[size]->setNazwisko(s);
+    cin >> nazw;
     cout << "Wprowadź stanowisko pracownika: ";
-    cin >> s;
-    pracownicyAll[size]->setStanowisko(s);
+    cin >> stan;
 
-    size++;
-}
-void dodaj(Pracownik*& pracownicyAll, size_t& size) {
-    string s;
-    Pracownik* temp = new Pracownik[size + 1];
-
-    for (size_t i = 0; i < size; ++i)
-        temp[i] = pracownicyAll[i];
-    delete[] pracownicyAll;
-    pracownicyAll = temp;
-
-    pracownicyAll[size].setWynagrodzenie(randWynagrodzenie(5000, 3000));
-    cout << "Wprowadź imie pracownika: ";
-    cin >> s;
-    pracownicyAll[size].setImie(s);
-    cout << "Wprowadź nazwisko pracownika: ";
-    cin >> s;
-    pracownicyAll[size].setNazwisko(s);
-    cout << "Wprowadź stanowisko pracownika: ";
-    cin >> s;
-    pracownicyAll[size].setStanowisko(s);
+    pracownicy.push_back(make_shared<Pracownik>(imie, nazw, stan, randWynagrodzenie(5000, 3000)));
 
     size++;
 }
 
-
-void print(Pracownik* mPracownik) {
-    cout << endl << "Pracownik: " << mPracownik->getImie() << " " << mPracownik->getNazwisko();
-    cout << endl << "Wynagrodznie: " << mPracownik->getWynagrodzenie();
-    cout << endl << "Stanowisko: " << mPracownik->getStanowisko();
-}
-void print(Pracownik* pracownik, const size_t rozmiar) {
-    std::cout << "<======= Pracownicy =======>" << std::endl;
-    for (size_t ind = 0; ind < rozmiar; ind++) {
-        cout << pracownik[ind].getID() << "\t" << pracownik[ind].getImie() << "\t" << pracownik[ind].getNazwisko() << "\t" << pracownik[ind].getWynagrodzenie() << "\t" << pracownik[ind].getStanowisko() << endl;
-    }
-}
-void print(Pracownik** pracownicy, const size_t rozmiar) {
+void print(vector<shared_ptr<Pracownik>> pracownicy, const size_t rozmiar) {
     cout << "<======= Pracownicy =======>" << endl;
     for (size_t ind = 0; ind < rozmiar; ind++) {
         cout << pracownicy[ind]->getID() << "\t" << pracownicy[ind]->getImie() << "\t" << pracownicy[ind]->getNazwisko() << "\t" << pracownicy[ind]->getWynagrodzenie() << "\t" << pracownicy[ind]->getStanowisko() << endl;
     }
 }
 
-
-void usun(Pracownik*& pracownik) {
-    delete[] pracownik;
-    pracownik = nullptr;
-}
-void usun(Pracownik*& pracownik, size_t& rozmiar) {
-    delete[] pracownik;
-    pracownik = nullptr;
+void usun(vector<shared_ptr<Pracownik>>& pracownicy, size_t& rozmiar) {
+    pracownicy.erase(pracownicy.begin(), pracownicy.end());
     rozmiar = 0;
 }
-void usun(Pracownik**& pracownicy, size_t& rozmiar) {
-    for (size_t ind = 0; ind < rozmiar; ind++)
-        delete pracownicy[ind];
-    delete[] pracownicy;
-    pracownicy = nullptr;
-    rozmiar = 0;
+void usun(vector<shared_ptr<Pracownik>>& pracownicy, size_t& size, size_t index) {
+    pracownicy.erase(pracownicy.begin() + index);
+    size--;
 }
 
-void usun(Pracownik*& pracownicyAll, size_t& size, size_t index) {
-    if (index < size) {
-        Pracownik* temp = new Pracownik[size - 1];
-        short int j{ -1 };
-        for (size_t i = 0; i < size; ++i)
-            if (i != index) {
-                ++j;
-                temp[j] = pracownicyAll[i];
-            }
-        delete[] pracownicyAll;
-        pracownicyAll = temp;
-        --size;
-    }
-    else
-        cout << "ERROR: Index jest nieprawidłowy ! " << endl;
-}
-void usun(Pracownik**& pracownicyAll, size_t& size, size_t index) {
-    if (index < size) {
-        Pracownik** temp = new Pracownik * [size - 1];
-        short int j{ -1 };
-        for (size_t i = 0; i < size; ++i)
-            if (i != index) {
-                ++j;
-                temp[j] = pracownicyAll[i];
-            }
-        delete[] pracownicyAll;
-        pracownicyAll = temp;
-        --size;
-    }
-    else
-        cout << "ERROR: Index jest nieprawidłowy ! " << endl;
-}
-
-
-void stanowiskaPracy(Pracownik* pracownik, const size_t rozmiar) {
-    vector <string> stanowiska;
-
-    for (size_t i = 0; i < rozmiar; i++) {
-        stanowiska.push_back(pracownik[i].getStanowisko());
-    }
-
-    sort(stanowiska.begin(), stanowiska.end());
-    stanowiska.erase(unique(stanowiska.begin(), stanowiska.end()), stanowiska.end());
-
-    cout << endl << "Stanowiska pracy, ilość pracowników i ich średnie wynagrodzenie: " << endl;
-    for (size_t i = 0; i < stanowiska.size(); i++) {
-        int count = 0;
-        double srednia = 0;
-
-        for (size_t j = 0; j < rozmiar; j++) {
-            if (stanowiska[i] == pracownik[j].getStanowisko()) {
-                count++;
-                srednia += pracownik[j].getWynagrodzenie();
-            }
-        }
-        cout << stanowiska[i] << ":\t" << count << "\t" << (srednia / count) << endl;
-    }
-}
-void stanowiskaPracy(Pracownik** pracownik, const size_t rozmiar) {
+void stanowiskaPracy(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar) {
     vector <string> stanowiska;
 
     for (size_t i = 0; i < rozmiar; i++) {
@@ -327,30 +155,14 @@ void stanowiskaPracy(Pracownik** pracownik, const size_t rozmiar) {
         cout << stanowiska[i] << ":\t" << count << "\t" << (srednia / count) << endl;
     }
 }
-void wyplaty(Pracownik* pracownik, const size_t rozmiar) {
-    double wyplaty = 0;
-    for (size_t i = 0; i < rozmiar; i++) {
-        wyplaty += pracownik[i].getWynagrodzenie();
-    }
-    cout << "Wydatki na wypłaty: " << wyplaty << endl;
-}
-void wyplaty(Pracownik** pracownik, const size_t rozmiar) {
+void wyplaty(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar) {
     double wyplaty = 0;
     for (size_t i = 0; i < rozmiar; i++) {
         wyplaty += pracownik[i]->getWynagrodzenie();
     }
     cout << "Wydatki na wypłaty: " << wyplaty << endl;
 }
-void sredniaZarobkow(Pracownik* pracownik, const size_t rozmiar) {
-    double sredniaZar = 0;
-
-    for (size_t i = 0; i < rozmiar; i++) {
-        sredniaZar += pracownik[i].getWynagrodzenie();
-    }
-    cout << endl;
-    cout << "Średnia zarobków pracowników: " << (sredniaZar / rozmiar) << endl;
-}
-void sredniaZarobkow(Pracownik** pracownik, const size_t rozmiar) {
+void sredniaZarobkow(vector<shared_ptr<Pracownik>>pracownik, const size_t rozmiar) {
     double sredniaZar = 0;
 
     for (size_t i = 0; i < rozmiar; i++) {
@@ -359,20 +171,7 @@ void sredniaZarobkow(Pracownik** pracownik, const size_t rozmiar) {
     cout << endl;
     cout << "Średnia zarobków pracowników: " << (sredniaZar / rozmiar) << endl;
 }
-void maxZarobki(Pracownik* pracownik, const size_t rozmiar) {
-    int index = 0;
-
-    for (size_t i = 0; i < rozmiar; i++) {
-        /*if (pracownik[i].getWynagrodzenie() > pracownik[index].getWynagrodzenie()) {
-            index = i;
-        }*/
-        if (pracownik[i].getWynagrodzenie() == max(pracownik[i].getWynagrodzenie(),pracownik[index].getWynagrodzenie())) {
-            index = i;
-        }
-    }
-    cout << endl << "Najwyższe zarobki: " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << " " << pracownik[index].getWynagrodzenie() << " " << pracownik[index].getStanowisko() << endl;
-}
-void maxZarobki(Pracownik** pracownik, const size_t rozmiar) {
+void maxZarobki(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar) {
     int index = 0;
 
     for (size_t i = 0; i < rozmiar; i++) {
@@ -382,17 +181,7 @@ void maxZarobki(Pracownik** pracownik, const size_t rozmiar) {
     }
     cout << endl << "Najwyższe zarobki: " << pracownik[index]->getImie() << " " << pracownik[index]->getNazwisko() << " " << pracownik[index]->getWynagrodzenie() << " " << pracownik[index]->getStanowisko() << endl;
 }
-void minZarobki(Pracownik* pracownik, const size_t rozmiar) {
-    int index = 0;
-
-    for (size_t i = 0; i < rozmiar; i++) {
-        if (pracownik[i].getWynagrodzenie() < pracownik[index].getWynagrodzenie()) {
-            index = i;
-        }
-    }
-    cout << "Najniższe zarobki: " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << " " << pracownik[index].getWynagrodzenie() << " " << pracownik[index].getStanowisko() << endl;
-}
-void minZarobki(Pracownik** pracownik, const size_t rozmiar) {
+void minZarobki(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar) {
     int index = 0;
 
     for (size_t i = 0; i < rozmiar; i++) {
@@ -402,23 +191,10 @@ void minZarobki(Pracownik** pracownik, const size_t rozmiar) {
     }
     cout << "Najniższe zarobki: " << pracownik[index]->getImie() << " " << pracownik[index]->getNazwisko() << " " << pracownik[index]->getWynagrodzenie() << " " << pracownik[index]->getStanowisko() << endl;
 }
-void statystykiPracownikow(Pracownik* pracownik, const size_t rozmiar) {
+void statystykiPracownikow(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar) {
     cout << endl << "<======= Statystyki pracowników =======>" << endl << endl;
 
-    if (pracownik != nullptr) {
-        cout << "Ilość pracowników: " << rozmiar;
-    }
-
-    sredniaZarobkow(pracownik, rozmiar);
-    wyplaty(pracownik, rozmiar);
-    maxZarobki(pracownik, rozmiar);
-    minZarobki(pracownik, rozmiar);
-    stanowiskaPracy(pracownik, rozmiar);
-}
-void statystykiPracownikow(Pracownik** pracownik, const size_t rozmiar) {
-    cout << endl << "<======= Statystyki pracowników =======>" << endl << endl;
-
-    if (pracownik != nullptr) {
+    if (!pracownik.empty()) {
         cout << "Ilość pracowników: " << rozmiar;
     }
     sredniaZarobkow(pracownik, rozmiar);
@@ -429,7 +205,7 @@ void statystykiPracownikow(Pracownik** pracownik, const size_t rozmiar) {
 }
 
 
-void zmianaWynagordzenia(Pracownik** pracownik) {
+void zmianaWynagordzenia(vector<shared_ptr<Pracownik>> pracownik) {
     int index, choice;
     double kwota = 0;
 
@@ -467,46 +243,6 @@ void zmianaWynagordzenia(Pracownik** pracownik) {
         cout << "Pracownik: " << pracownik[index]->getImie() << " " << pracownik[index]->getNazwisko() << endl;
         cout << "Stanowisko: " << pracownik[index]->getStanowisko() << endl;
         cout << "Wynagrodzenie: " << pracownik[index]->getWynagrodzenie() << endl;
-    }
-}
-void zmianaWynagordzenia(Pracownik* pracownik) {
-    int index, choice;
-    double kwota = 0;
-
-    cout << "Indeks pracownika do zmiany wynagrodzenia: ";
-    cin >> index;
-
-    cout << endl << "Pracownik: " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << endl;
-    cout << "Stanowisko: " << pracownik[index].getStanowisko() << endl;
-    cout << "Wynagrodzenie: " << pracownik[index].getWynagrodzenie() << endl << endl;
-
-    cout << "Zmniejszyć, czy zwiekszyć wynagrodzenie? " << endl;
-    cout << "Zmniejszyć - 0 " << endl;
-    cout << "Zwiększyć - 1 " << endl;
-    cout << "Twój wybór: ";
-    cin >> choice;
-
-    switch (choice) {
-    case(0):
-        cout << endl << "O jaką kwotę zmniejszyć wynagrodzenie: ";
-        cin >> kwota;
-        pracownik[index].setWynagrodzenie(pracownik[index].getWynagrodzenie() - kwota);
-        break;
-    case(1):
-        cout << endl << "O jaką kwotę zwiększyć wynagrodzenie: ";
-        cin >> kwota;
-        pracownik[index].setWynagrodzenie(pracownik[index].getWynagrodzenie() + kwota);
-        break;
-    default:
-        cout << endl << "Coś poszło nie tak, spróbuj ponownie." << endl;
-        break;
-    }
-
-    if (kwota != 0) {
-        cout << endl << "Informacje po zmianie: " << endl;
-        cout << "Pracownik: " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << endl;
-        cout << "Stanowisko: " << pracownik[index].getStanowisko() << endl;
-        cout << "Wynagrodzenie: " << pracownik[index].getWynagrodzenie() << endl;
     }
 }
 

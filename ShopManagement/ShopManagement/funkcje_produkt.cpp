@@ -2,13 +2,12 @@
 #include <locale>
 #include <cstdlib>
 #include <vector>
-#include <algorithm>
 #include <memory>
+#include <algorithm>
 #include "Produkty.h"
 #include "Utilities.h"
 
 using namespace std;
-
 
 
 

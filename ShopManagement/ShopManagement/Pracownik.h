@@ -3,6 +3,8 @@
 #include <locale>
 #include <cstdlib>
 #include <map>
+#include <vector>
+#include <memory>
 
 using namespace std;
 
@@ -107,42 +109,25 @@ inline void Pracownik::Zadania::setZrobione(bool z) { zrobione = z; }
 int idPracownika();
 
 
-void stworz(Pracownik*& pracownik);
-void stworz(Pracownik**& pracownik);
-//void stworz(Pracownik*& pracownik, const size_t rozmiar);
-void stworz(Pracownik**& pracownicy, const size_t rozmiar);
+void stworz(vector<shared_ptr<Pracownik>>& pracownik);
+//void stworz(Pracownik**& pracownik);
+void stworz(vector<shared_ptr<Pracownik>>& pracownicy, const size_t rozmiar);
 //void stworz(Zadania**& listaZadan, const size_t rozmiar);
 
-void ini(Pracownik*& pracownik);
-void ini(Pracownik& pracownik);
-void ini(Pracownik* pracownik, const size_t rozmiar);
-void ini(Pracownik** pracownicy, const size_t rozmiar);
-void dodaj(Pracownik**& pracownicyAll, size_t& size);
-void dodaj(Pracownik*& pracownicyAll, size_t& size);
-void print(Pracownik* mPracownik);
-void print(Pracownik* pracownik, const size_t rozmiar);
-void print(Pracownik** pracownicy, const size_t rozmiar);
-void usun(Pracownik*& pracownik);
-void usun(Pracownik*& pracownik, size_t& rozmiar);
-void usun(Pracownik**& pracownicy, size_t& rozmiar);
-void usun(Pracownik*& pracownicyAll, size_t& size, size_t index);
-void usun(Pracownik**& pracownicyAll, size_t& size, size_t index);
+
+void dodaj(vector<shared_ptr<Pracownik>>& pracownicy, size_t& size);
+void print(vector<shared_ptr<Pracownik>> pracownicy, const size_t rozmiar);
+void usun(vector<shared_ptr<Pracownik>>& pracownicy, size_t& rozmiar);
+void usun(vector<shared_ptr<Pracownik>>& pracownicy, size_t& size, size_t index);
 //void usun(Zadania**& listaZadan, size_t& rozmiar);
 
-void stanowiskaPracy(Pracownik* pracownik, const size_t rozmiar);
-void stanowiskaPracy(Pracownik** pracownik, const size_t rozmiar);
-void wyplaty(Pracownik* pracownik, const size_t rozmiar);
-void wyplaty(Pracownik** pracownik, const size_t rozmiar);
-void sredniaZarobkow(Pracownik* pracownik, const size_t rozmiar);
-void sredniaZarobkow(Pracownik** pracownik, const size_t rozmiar);
-void maxZarobki(Pracownik* pracownik, const size_t rozmiar);
-void maxZarobki(Pracownik** pracownik, const size_t rozmiar);
-void minZarobki(Pracownik* pracownik, const size_t rozmiar);
-void minZarobki(Pracownik** pracownik, const size_t rozmiar);
-void statystykiPracownikow(Pracownik* pracownik, const size_t rozmiar);
-void statystykiPracownikow(Pracownik** pracownik, const size_t rozmiar);
-void zmianaWynagordzenia(Pracownik** pracownik);
-void zmianaWynagordzenia(Pracownik* pracownik);
+void stanowiskaPracy(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar);
+void wyplaty(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar);
+void sredniaZarobkow(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar);
+void maxZarobki(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar);
+void minZarobki(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar);
+void statystykiPracownikow(vector<shared_ptr<Pracownik>> pracownik, const size_t rozmiar);
+void zmianaWynagordzenia(vector<shared_ptr<Pracownik>> pracownik);
 
 size_t zadanieID();
 

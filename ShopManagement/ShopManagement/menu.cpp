@@ -11,7 +11,7 @@
 using namespace std;
 
 
-void listaZadanPracownicyMenu(Pracownik*& pracownik, size_t& rozmiar, size_t index) {
+void listaZadanPracownicyMenu(vector<shared_ptr<Pracownik>>& pracownik, size_t& rozmiar, size_t index) {
     setlocale(LC_CTYPE, "Polish");
 
     int programExit = 1;
@@ -21,7 +21,7 @@ void listaZadanPracownicyMenu(Pracownik*& pracownik, size_t& rozmiar, size_t ind
         int indexZad;
 
         cout << "<======= MENU LISTA ZADAŃ PRACOWNIKÓW =======>" << endl << endl;
-        cout << "Pracownik: " << pracownik[index].getID() << " " << pracownik[index].getImie() << " " << pracownik[index].getNazwisko() << endl << endl;
+        cout << "Pracownik: " << pracownik[index]->getID() << " " << pracownik[index]->getImie() << " " << pracownik[index]->getNazwisko() << endl << endl;
         cout << "1. Pokaż listę zadań" << endl;
         cout << "2. Dodaj do listy zadań" << endl;
         cout << "3. Usuń z listy zadań po indeksie" << endl;
@@ -34,18 +34,18 @@ void listaZadanPracownicyMenu(Pracownik*& pracownik, size_t& rozmiar, size_t ind
 
         switch (choice) {
         case(1):
-            pracownik[index].print();
+            pracownik[index]->print();
             break;
         case(2):
-            pracownik[index].dodaj();
+            pracownik[index]->dodaj();
             break;
         case(3):
             cout << "Podaj indeks zadania: ";
             cin >> indexZad;
-            pracownik[index].usun(indexZad);
+            pracownik[index]->usun(indexZad);
             break;
         case(4):
-            pracownik[index].usun();
+            pracownik[index]->usun();
             break;
         case(0):
             programExit = 0;
@@ -65,7 +65,7 @@ void listaZadanPracownicyMenu(Pracownik*& pracownik, size_t& rozmiar, size_t ind
     } while (programExit != 0);
 }
 
-void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
+void pracownicyMenu(vector<shared_ptr<Pracownik>>& pracownicy, size_t& rozmiar) {
     setlocale(LC_CTYPE, "Polish");
 
     int programExit = 1;
@@ -91,7 +91,6 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
         switch (choice) {
         case(1):
             stworz(pracownicy, rozmiar);
-            ini(pracownicy, rozmiar);
             break;
         case(2):
             cout << "Indeks pracownika do usunięcia: ";
@@ -105,7 +104,7 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
             dodaj(pracownicy, rozmiar);
             break;
         case(5):
-            if (pracownicy != nullptr) {
+            if (!pracownicy.empty()) {
                 statystykiPracownikow(pracownicy, rozmiar);
             }
             else {
@@ -113,7 +112,7 @@ void pracownicyMenu(Pracownik*& pracownicy, size_t& rozmiar) {
             }
             break;
         case(6):
-            if (pracownicy != nullptr) {
+            if (!pracownicy.empty()) {
                 zmianaWynagordzenia(pracownicy);
             }
             else {
@@ -226,7 +225,8 @@ void mainMenu() {
     setlocale(LC_CTYPE, "Polish");
 
     int programExit = 1;
-    Pracownik* pracownicy = nullptr;
+    //Pracownik* pracownicy = nullptr;
+    vector < shared_ptr<Pracownik>> pracownicy;
     //vector <Pracownik> pracownicy;
     vector<shared_ptr<Produkt>> produkty;
 
